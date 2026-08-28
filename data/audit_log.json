@@ -1,0 +1,5202 @@
+[
+    {
+        "timestamp": "2026-08-28T14:22:21.517573",
+        "customer_id": "C0001",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 2,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.6,
+            "expected_revenue": 1199.4,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517608",
+        "customer_id": "C0002",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 25,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517626",
+        "customer_id": "C0003",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 16,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.33,
+            "expected_revenue": 164.67,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517639",
+        "customer_id": "C0004",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 18,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.71,
+            "expected_revenue": 354.29,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517646",
+        "customer_id": "C0005",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 9,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517654",
+        "customer_id": "C0006",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 8,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517666",
+        "customer_id": "C0007",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 22,
+            "previous_failures": 5,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.57,
+            "expected_revenue": 1424.43,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517672",
+        "customer_id": "C0008",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 21,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517683",
+        "customer_id": "C0009",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "card_expired",
+            "previous_successes": 0,
+            "previous_failures": 0,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.7,
+            "expected_revenue": 3499.3,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517689",
+        "customer_id": "C0010",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 18,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517694",
+        "customer_id": "C0011",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 13,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517699",
+        "customer_id": "C0012",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 8,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517705",
+        "customer_id": "C0013",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 5,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517720",
+        "customer_id": "C0014",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "card_expired",
+            "previous_successes": 2,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.53,
+            "expected_revenue": 794.47,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517725",
+        "customer_id": "C0015",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 19,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517730",
+        "customer_id": "C0016",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 3,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517735",
+        "customer_id": "C0017",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 21,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517740",
+        "customer_id": "C0018",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 18,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517751",
+        "customer_id": "C0019",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 9,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.34,
+            "expected_revenue": 3399.66,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517756",
+        "customer_id": "C0020",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 12,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517767",
+        "customer_id": "C0021",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 12,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.53,
+            "expected_revenue": 1324.47,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517778",
+        "customer_id": "C0022",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 15,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.77,
+            "expected_revenue": 1924.23,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517784",
+        "customer_id": "C0023",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 22,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517794",
+        "customer_id": "C0024",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 9,
+            "previous_failures": 5,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.56,
+            "expected_revenue": 1399.44,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517804",
+        "customer_id": "C0025",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 16,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.68,
+            "expected_revenue": 1699.32,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517810",
+        "customer_id": "C0026",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 6,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517820",
+        "customer_id": "C0027",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 24,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.72,
+            "expected_revenue": 1799.28,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517825",
+        "customer_id": "C0028",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 10,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517849",
+        "customer_id": "C0029",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 4,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517857",
+        "customer_id": "C0030",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 10,
+            "previous_failures": 3,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517882",
+        "customer_id": "C0031",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 19,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.43,
+            "expected_revenue": 1074.57,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517887",
+        "customer_id": "C0032",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 7,
+            "previous_failures": 5,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517892",
+        "customer_id": "C0033",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 6,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517903",
+        "customer_id": "C0034",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 6,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.59,
+            "expected_revenue": 471.41,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517909",
+        "customer_id": "C0035",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 21,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517914",
+        "customer_id": "C0036",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 7,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517924",
+        "customer_id": "C0037",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 15,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.71,
+            "expected_revenue": 354.29,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517934",
+        "customer_id": "C0038",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "card_expired",
+            "previous_successes": 19,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 5499.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517945",
+        "customer_id": "C0039",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 7,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.63,
+            "expected_revenue": 1574.37,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517955",
+        "customer_id": "C0040",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 19,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.82,
+            "expected_revenue": 409.18,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517960",
+        "customer_id": "C0041",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 4,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517965",
+        "customer_id": "C0042",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 1,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517975",
+        "customer_id": "C0043",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 3,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.53,
+            "expected_revenue": 423.47,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 799
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517986",
+        "customer_id": "C0044",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 7,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.57,
+            "expected_revenue": 1424.43,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.517996",
+        "customer_id": "C0045",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 19,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.74,
+            "expected_revenue": 1849.26,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518006",
+        "customer_id": "C0046",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 11,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 549.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518012",
+        "customer_id": "C0047",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 13,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518024",
+        "customer_id": "C0048",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 8,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.8,
+            "expected_revenue": 1999.2,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518029",
+        "customer_id": "C0049",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 6,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518034",
+        "customer_id": "C0050",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 6,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518044",
+        "customer_id": "C0051",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 20,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.47,
+            "expected_revenue": 234.53,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518049",
+        "customer_id": "C0052",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 17,
+            "previous_failures": 1,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518054",
+        "customer_id": "C0053",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 13,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518067",
+        "customer_id": "C0054",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 15,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.61,
+            "expected_revenue": 1524.39,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518072",
+        "customer_id": "C0055",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 1,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518077",
+        "customer_id": "C0056",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 13,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518082",
+        "customer_id": "C0057",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 4,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518087",
+        "customer_id": "C0058",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 14,
+            "previous_failures": 5,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518097",
+        "customer_id": "C0059",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "card_expired",
+            "previous_successes": 15,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.61,
+            "expected_revenue": 3049.39,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518102",
+        "customer_id": "C0060",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "card_expired",
+            "previous_successes": 11,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518118",
+        "customer_id": "C0061",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 16,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.77,
+            "expected_revenue": 1924.23,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518123",
+        "customer_id": "C0062",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "card_expired",
+            "previous_successes": 19,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518128",
+        "customer_id": "C0063",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 18,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518133",
+        "customer_id": "C0064",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 10,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518143",
+        "customer_id": "C0065",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "card_expired",
+            "previous_successes": 5,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.63,
+            "expected_revenue": 6299.37,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518154",
+        "customer_id": "C0066",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 16,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.24,
+            "expected_revenue": 479.76,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518159",
+        "customer_id": "C0067",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 18,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518171",
+        "customer_id": "C0068",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 14,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.72,
+            "expected_revenue": 719.28,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518181",
+        "customer_id": "C0069",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 4,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.66,
+            "expected_revenue": 989.34,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518192",
+        "customer_id": "C0070",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 22,
+            "previous_failures": 0,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.75,
+            "expected_revenue": 1124.25,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518203",
+        "customer_id": "C0071",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 3,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.26,
+            "expected_revenue": 389.74,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518208",
+        "customer_id": "C0072",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 2,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518220",
+        "customer_id": "C0073",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "card_expired",
+            "previous_successes": 22,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.66,
+            "expected_revenue": 1319.34,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518225",
+        "customer_id": "C0074",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 4,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518237",
+        "customer_id": "C0075",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 7,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.6,
+            "expected_revenue": 5999.4,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518243",
+        "customer_id": "C0076",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 25,
+            "previous_failures": 3,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518248",
+        "customer_id": "C0077",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 11,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518255",
+        "customer_id": "C0078",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 23,
+            "previous_failures": 3,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518266",
+        "customer_id": "C0079",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 22,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.65,
+            "expected_revenue": 1624.35,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518271",
+        "customer_id": "C0080",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 15,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518283",
+        "customer_id": "C0081",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 0,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.29,
+            "expected_revenue": 231.71,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518295",
+        "customer_id": "C0082",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "card_expired",
+            "previous_successes": 6,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.45,
+            "expected_revenue": 2249.55,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518300",
+        "customer_id": "C0083",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 14,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518304",
+        "customer_id": "C0084",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 1,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518309",
+        "customer_id": "C0085",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 10,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518316",
+        "customer_id": "C0086",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 3,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518328",
+        "customer_id": "C0087",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 8,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.69,
+            "expected_revenue": 689.31,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518333",
+        "customer_id": "C0088",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 17,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518338",
+        "customer_id": "C0089",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 6,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518348",
+        "customer_id": "C0090",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "card_expired",
+            "previous_successes": 4,
+            "previous_failures": 3,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.65,
+            "expected_revenue": 974.35,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518353",
+        "customer_id": "C0091",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 18,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518365",
+        "customer_id": "C0092",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "card_expired",
+            "previous_successes": 3,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.57,
+            "expected_revenue": 1424.43,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518376",
+        "customer_id": "C0093",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "card_expired",
+            "previous_successes": 9,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.57,
+            "expected_revenue": 455.43,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518388",
+        "customer_id": "C0094",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 4,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.41,
+            "expected_revenue": 614.59,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518399",
+        "customer_id": "C0095",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 17,
+            "previous_failures": 1,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.74,
+            "expected_revenue": 1109.26,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518404",
+        "customer_id": "C0096",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 18,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518408",
+        "customer_id": "C0097",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 8,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518421",
+        "customer_id": "C0098",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 9,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.62,
+            "expected_revenue": 929.38,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518426",
+        "customer_id": "C0099",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 10,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518440",
+        "customer_id": "C0100",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 16,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.35,
+            "expected_revenue": 874.65,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518451",
+        "customer_id": "C0101",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 6,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.63,
+            "expected_revenue": 1259.37,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518456",
+        "customer_id": "C0102",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 10,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518466",
+        "customer_id": "C0103",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "card_expired",
+            "previous_successes": 14,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 1099.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518471",
+        "customer_id": "C0104",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 0,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518476",
+        "customer_id": "C0105",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 2,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518481",
+        "customer_id": "C0106",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 23,
+            "previous_failures": 1,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518491",
+        "customer_id": "C0107",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 7,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.7,
+            "expected_revenue": 1749.3,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518504",
+        "customer_id": "C0108",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 25,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.39,
+            "expected_revenue": 584.61,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518509",
+        "customer_id": "C0109",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 12,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518515",
+        "customer_id": "C0110",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 4,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518527",
+        "customer_id": "C0111",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 1,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.49,
+            "expected_revenue": 489.51,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518532",
+        "customer_id": "C0112",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 8,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518543",
+        "customer_id": "C0113",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 18,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.27,
+            "expected_revenue": 215.73,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518553",
+        "customer_id": "C0114",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 1,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.24,
+            "expected_revenue": 2399.76,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 9999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518558",
+        "customer_id": "C0115",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 15,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518563",
+        "customer_id": "C0116",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 10,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518570",
+        "customer_id": "C0117",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 16,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518575",
+        "customer_id": "C0118",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 21,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518580",
+        "customer_id": "C0119",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 23,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518592",
+        "customer_id": "C0120",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 4,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 439.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 799
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518602",
+        "customer_id": "C0121",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 10,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.54,
+            "expected_revenue": 431.46,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518607",
+        "customer_id": "C0122",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 8,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518612",
+        "customer_id": "C0123",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 13,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518626",
+        "customer_id": "C0124",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 19,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.58,
+            "expected_revenue": 1449.42,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518637",
+        "customer_id": "C0125",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 18,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.59,
+            "expected_revenue": 2949.41,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518647",
+        "customer_id": "C0126",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 2,
+            "previous_failures": 3,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.38,
+            "expected_revenue": 949.62,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518658",
+        "customer_id": "C0127",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 7,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.54,
+            "expected_revenue": 539.46,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518663",
+        "customer_id": "C0128",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 14,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518668",
+        "customer_id": "C0129",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 25,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518679",
+        "customer_id": "C0130",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 12,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.69,
+            "expected_revenue": 1724.31,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518689",
+        "customer_id": "C0131",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 17,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 2749.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518701",
+        "customer_id": "C0132",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "card_expired",
+            "previous_successes": 10,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.49,
+            "expected_revenue": 244.51,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518707",
+        "customer_id": "C0133",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 24,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518717",
+        "customer_id": "C0134",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 1,
+            "previous_failures": 0,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.66,
+            "expected_revenue": 6599.34,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518727",
+        "customer_id": "C0135",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 18,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.53,
+            "expected_revenue": 2649.47,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518740",
+        "customer_id": "C0136",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 21,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.53,
+            "expected_revenue": 2649.47,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518750",
+        "customer_id": "C0137",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 0,
+            "previous_failures": 5,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.42,
+            "expected_revenue": 419.58,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518755",
+        "customer_id": "C0138",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 21,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518770",
+        "customer_id": "C0139",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 5,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 1099.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518775",
+        "customer_id": "C0140",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 16,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518787",
+        "customer_id": "C0141",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 18,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.6,
+            "expected_revenue": 1199.4,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518793",
+        "customer_id": "C0142",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 6,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518797",
+        "customer_id": "C0143",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 2,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518808",
+        "customer_id": "C0144",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 7,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.69,
+            "expected_revenue": 551.31,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518818",
+        "customer_id": "C0145",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "card_expired",
+            "previous_successes": 18,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.61,
+            "expected_revenue": 6099.39,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 9999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518823",
+        "customer_id": "C0146",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "card_expired",
+            "previous_successes": 25,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518847",
+        "customer_id": "C0147",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "card_expired",
+            "previous_successes": 24,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518854",
+        "customer_id": "C0148",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 25,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518895",
+        "customer_id": "C0149",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 3,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.42,
+            "expected_revenue": 1049.58,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518902",
+        "customer_id": "C0150",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 21,
+            "previous_failures": 4,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518912",
+        "customer_id": "C0151",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 2,
+            "previous_failures": 4,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.49,
+            "expected_revenue": 979.51,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518923",
+        "customer_id": "C0152",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 19,
+            "previous_failures": 1,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.72,
+            "expected_revenue": 1799.28,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518928",
+        "customer_id": "C0153",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 17,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518938",
+        "customer_id": "C0154",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "card_expired",
+            "previous_successes": 8,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.61,
+            "expected_revenue": 6099.39,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 9999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518943",
+        "customer_id": "C0155",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 25,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518955",
+        "customer_id": "C0156",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 18,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.79,
+            "expected_revenue": 789.21,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518960",
+        "customer_id": "C0157",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 15,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518965",
+        "customer_id": "C0158",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "card_expired",
+            "previous_successes": 13,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518977",
+        "customer_id": "C0159",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 2,
+            "previous_failures": 1,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.61,
+            "expected_revenue": 609.39,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518987",
+        "customer_id": "C0160",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "card_expired",
+            "previous_successes": 8,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.63,
+            "expected_revenue": 503.37,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 799
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.518998",
+        "customer_id": "C0161",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 5,
+            "previous_failures": 1,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.69,
+            "expected_revenue": 1724.31,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519003",
+        "customer_id": "C0162",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 21,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519017",
+        "customer_id": "C0163",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 23,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "retry_payment",
+            "confidence": 0.66,
+            "expected_revenue": 989.34,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519022",
+        "customer_id": "C0164",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 14,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519032",
+        "customer_id": "C0165",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 6,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.62,
+            "expected_revenue": 619.38,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519042",
+        "customer_id": "C0166",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "card_expired",
+            "previous_successes": 8,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.61,
+            "expected_revenue": 3049.39,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 4999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519053",
+        "customer_id": "C0167",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 23,
+            "previous_failures": 4,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.35,
+            "expected_revenue": 174.65,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519058",
+        "customer_id": "C0168",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 8,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519068",
+        "customer_id": "C0169",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 1,
+            "previous_failures": 3,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.37,
+            "expected_revenue": 369.63,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519073",
+        "customer_id": "C0170",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 6,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519078",
+        "customer_id": "C0171",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 10,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519090",
+        "customer_id": "C0172",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 4,
+            "previous_failures": 5,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.54,
+            "expected_revenue": 269.46,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519101",
+        "customer_id": "C0173",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 11,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.53,
+            "expected_revenue": 1324.47,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519106",
+        "customer_id": "C0174",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 14,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519119",
+        "customer_id": "C0175",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 9,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.46,
+            "expected_revenue": 367.54,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519124",
+        "customer_id": "C0176",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 13,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519129",
+        "customer_id": "C0177",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 0,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519134",
+        "customer_id": "C0178",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 16,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519141",
+        "customer_id": "C0179",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "card_expired",
+            "previous_successes": 14,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519146",
+        "customer_id": "C0180",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "suspicious_reversal",
+            "previous_successes": 16,
+            "previous_failures": 2,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519152",
+        "customer_id": "C0181",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "card_expired",
+            "previous_successes": 7,
+            "previous_failures": 0,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519157",
+        "customer_id": "C0182",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 7,
+            "previous_failures": 0,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519168",
+        "customer_id": "C0183",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "card_expired",
+            "previous_successes": 16,
+            "previous_failures": 2,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.74,
+            "expected_revenue": 369.26,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519178",
+        "customer_id": "C0184",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 18,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.59,
+            "expected_revenue": 471.41,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 799
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519189",
+        "customer_id": "C0185",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 4,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.18,
+            "expected_revenue": 269.82,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519194",
+        "customer_id": "C0186",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 16,
+            "previous_failures": 4,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519199",
+        "customer_id": "C0187",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 6,
+            "previous_failures": 1,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519213",
+        "customer_id": "C0188",
+        "payment": {
+            "amount": 1499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 12,
+            "previous_failures": 3,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.58,
+            "expected_revenue": 869.42,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519223",
+        "customer_id": "C0189",
+        "payment": {
+            "amount": 999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 24,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.3,
+            "expected_revenue": 299.7,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519228",
+        "customer_id": "C0190",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 19,
+            "previous_failures": 3,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519239",
+        "customer_id": "C0191",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "card_expired",
+            "previous_successes": 5,
+            "previous_failures": 0,
+            "retry_count": 0
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.75,
+            "expected_revenue": 1499.25,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 1999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519244",
+        "customer_id": "C0192",
+        "payment": {
+            "amount": 4999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 24,
+            "previous_failures": 1,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519254",
+        "customer_id": "C0193",
+        "payment": {
+            "amount": 2499,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 25,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_reminder",
+            "confidence": 0.3,
+            "expected_revenue": 749.7,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 2499
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519264",
+        "customer_id": "C0194",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "card_expired",
+            "previous_successes": 22,
+            "previous_failures": 0,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.64,
+            "expected_revenue": 6399.36,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519269",
+        "customer_id": "C0195",
+        "payment": {
+            "amount": 799,
+            "failure_reason": "bank_timeout",
+            "previous_successes": 3,
+            "previous_failures": 2,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519274",
+        "customer_id": "C0196",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 15,
+            "previous_failures": 5,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519281",
+        "customer_id": "C0197",
+        "payment": {
+            "amount": 1999,
+            "failure_reason": "insufficient_funds",
+            "previous_successes": 22,
+            "previous_failures": 5,
+            "retry_count": 3
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "gave_up",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Maximum retry limit reached."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "gave_up",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519293",
+        "customer_id": "C0198",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 10,
+            "previous_failures": 3,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.5,
+            "expected_revenue": 4999.5,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "recovered",
+            "recovered_amount": 9999
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519298",
+        "customer_id": "C0199",
+        "payment": {
+            "amount": 499,
+            "failure_reason": "mandate_changed_recently",
+            "previous_successes": 14,
+            "previous_failures": 1,
+            "retry_count": 2
+        },
+        "decision": {
+            "category": "flag_for_review",
+            "action": "hold_for_review",
+            "confidence": 0.0,
+            "expected_revenue": 0.0,
+            "reason": "Safety rule requires human review."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "flagged",
+            "recovered_amount": 0
+        }
+    },
+    {
+        "timestamp": "2026-08-28T14:22:21.519310",
+        "customer_id": "C0200",
+        "payment": {
+            "amount": 9999,
+            "failure_reason": "mandate_expired",
+            "previous_successes": 4,
+            "previous_failures": 2,
+            "retry_count": 1
+        },
+        "decision": {
+            "category": "normal_recovery",
+            "action": "send_update_link",
+            "confidence": 0.55,
+            "expected_revenue": 5499.45,
+            "reason": "Selected the action with the highest expected recovery value."
+        },
+        "safety": {
+            "unsafe_action": false,
+            "retry_limit_violation": false
+        },
+        "result": {
+            "outcome": "not_recovered",
+            "recovered_amount": 0
+        }
+    }
+]
