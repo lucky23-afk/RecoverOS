@@ -27,35 +27,25 @@ Look at the failure context, choose the appropriate action, apply safety rules, 
 ---
 
 ## How it works
-┌─────────────────────┐
-│   FAILED PAYMENT    │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│  CONTEXT ANALYSIS   │
-│ History • Reason    │
-│ Retry Count         │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│   DECISION ENGINE   │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│  SAFETY GUARDRAILS  │
-│ Retry Limits        │
-│ Risk Detection      │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│  RECOVERY ACTION    │
-│ Retry / Reminder /  │
-│ Update / Review     │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ AUDIT LOG + REVIEW  │
-└─────────────────────┘
+
+### System Architecture
+
+
+```text
+Failed Payment
+      ↓
+Context Analysis
+(Payment History + Failure Reason + Retry Count)
+      ↓
+Decision Engine
+      ↓
+Safety Guardrails
+      ↓
+Recommended Recovery Action
+      ↓
+Audit Log + Human Review
+```
+
 
 A failed payment enters RecoverOS and is evaluated using:
 
