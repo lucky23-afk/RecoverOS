@@ -1,0 +1,2 @@
+timestamp,payment_id,amount,failure_reason,recommended_action,final_action,recovery_probability,expected_revenue,recovered,recovery_amount,data_source,production,outcome_observed
+2026-08-31T22:09:40.043448,PROD_TEST_001,2500.0,bank_timeout,send_update_link,hold_for_review,0.8471,2217.76,1,2500.0,PRODUCTION,True,True

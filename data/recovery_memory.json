@@ -1,0 +1,23 @@
+[
+  {
+    "context_key": "bank_timeout|netbanking|saas",
+    "failure_reason": "bank_timeout",
+    "payment_method": "netbanking",
+    "merchant_type": "saas",
+    "strategies": {
+      "retry_payment": {
+        "attempts": 2,
+        "recoveries": 2,
+        "recovery_rate": 1.0,
+        "recovered_amount": 5000.0
+      },
+      "send_update_link": {
+        "attempts": 1,
+        "recoveries": 0,
+        "recovery_rate": 0.0,
+        "recovered_amount": 0.0
+      }
+    },
+    "updated_at": "2026-08-31T21:26:26.168214"
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "champion": {
+    "model_name": "recovery_model_production_challenger.pkl",
+    "version": "production-feedback-v1",
+    "status": "production",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0,
+    "created_at": "2026-08-31T23:44:11.400119",
+    "training_source": "production_feedback.csv",
+    "production_outcomes": 30,
+    "promoted_at": "2026-08-31T23:48:05.475447",
+    "previous_champion": "recovery_model.pkl"
+  },
+  "challengers": [
+    {
+      "model_name": "recovery_model_challenger.pkl",
+      "version": "v2",
+      "status": "challenger",
+      "accuracy": 0.6885,
+      "precision": null,
+      "recall": null,
+      "f1_score": 0.6715867158671587,
+      "roc_auc": 0.7617946771559359,
+      "created_at": "2026-08-31T15:43:53.122429"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-08-31T23:48:05.475447",
+      "previous_champion": "recovery_model.pkl",
+      "previous_version": "v1",
+      "new_champion": "recovery_model_production_challenger.pkl",
+      "new_version": "production-feedback-v1",
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "backup": "recovery_model_backup_20260831_234805.pkl"
+    }
+  ],
+  "promotions": [
+    {
+      "timestamp": "2026-08-31T23:48:05.475447",
+      "model_name": "recovery_model_production_challenger.pkl",
+      "version": "production-feedback-v1",
+      "approved": true,
+      "approved_by": "human",
+      "backup": "recovery_model_backup_20260831_234805.pkl"
+    }
+  ]
+}

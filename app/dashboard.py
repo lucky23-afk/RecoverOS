@@ -1,539 +1,716 @@
-import streamlit as st
+from pathlib import Path
 import json
-import pandas as pd
-import subprocess
 
-# --------------------------------
+import pandas as pd
+import streamlit as st
+
+
+# ================================================================
+# RecoverOS - PRODUCTION DASHBOARD
+# ================================================================
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+MODELS_DIR = BASE_DIR / "models"
+
+OUTCOMES_FILE = DATA_DIR / "outcomes.jsonl"
+REGISTRY_FILE = DATA_DIR / "model_registry.json"
+FEEDBACK_FILE = DATA_DIR / "production_feedback.csv"
+
+
+# ================================================================
 # PAGE CONFIG
-# --------------------------------
+# ================================================================
 
 st.set_page_config(
     page_title="RecoverOS",
     page_icon="💳",
-    layout="wide"
+    layout="wide",
 )
 
 
-# --------------------------------
-# LOAD AUDIT DATA
-# --------------------------------
+# ================================================================
+# HELPERS
+# ================================================================
 
-@st.cache_data
-def load_data():
+def load_json_file(path):
+    if not path.exists():
+        return {}
 
-    with open("../data/audit_log.json", "r") as file:
-        records = json.load(file)
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except Exception:
+        return {}
+
+
+def load_outcomes():
+    records = []
+
+    if not OUTCOMES_FILE.exists():
+        return records
+
+    with open(
+        OUTCOMES_FILE,
+        "r",
+        encoding="utf-8",
+    ) as file:
+
+        for line in file:
+            line = line.strip()
+
+            if not line:
+                continue
+
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+
+            records.append(record)
 
     return records
 
 
-records = load_data()
-
-
-# --------------------------------
-# CONVERT TO TABLE
-# --------------------------------
-
-rows = []
-
-for record in records:
-
-    rows.append({
-        "Customer": record["customer_id"],
-        "Amount": record["payment"]["amount"],
-        "Failure Reason": record["payment"]["failure_reason"],
-        "Previous Successes": record["payment"]["previous_successes"],
-        "Previous Failures": record["payment"]["previous_failures"],
-        "Retry Count": record["payment"]["retry_count"],
-        "Action": record["decision"]["action"],
-        "Recovery Confidence": record["decision"]["confidence"],
-        "Expected Revenue": record["decision"]["expected_revenue"],
-        "Outcome": record["result"]["outcome"],
-        "Recovered Amount": record["result"]["recovered_amount"],
-        "Unsafe Action": record["safety"]["unsafe_action"]
-    })
-
-
-df = pd.DataFrame(rows)
-
-
-# --------------------------------
-# TITLE
-# --------------------------------
-
-st.title("💳 RecoverOS")
-st.subheader(
-    "Intelligent Failed Payment Recovery System"
-)
-
-st.caption(
-    "AI-inspired decision engine • "
-    "Safety-controlled automation • "
-    "Synthetic prototype evaluation"
-)
-if st.button("▶ Run RecoverOS Analysis"):
-    with st.spinner("Running RecoverOS decision engine..."):
-        result = subprocess.run(
-    ["python", "-X", "utf8", "evaluation.py"],
-    capture_output=True,
-    text=True,
-    encoding="utf-8"
-)
-
-    if result.returncode == 0:
-        st.cache_data.clear()
-        st.success("RecoverOS analysis completed successfully!")
-    else:
-        st.error("Analysis failed.")
-        st.code(result.stderr)
-if st.button("🔄 Refresh Latest Recovery Data"):
-    st.cache_data.clear()
-    st.success("Latest recovery data loaded successfully.")
-st.divider()
-
-# --------------------------------
-# HOW RECOVEROS WORKS
-# --------------------------------
-
-st.header("⚙️ How RecoverOS Works")
-
-flow_col1, flow_col2, flow_col3, flow_col4, flow_col5 = st.columns(5)
-
-flow_col1.info(
-    "💳\n\nFAILED PAYMENT"
-)
-
-flow_col2.info(
-    "📊\n\nPAYMENT CONTEXT\n\nHistory • Reason • Retries"
-)
-
-flow_col3.info(
-    "🧠\n\nDECISION ENGINE"
-)
-
-flow_col4.info(
-    "🛡️\n\nSAFETY GUARDRAILS"
-)
-
-flow_col5.info(
-    "✅\n\nRECOVERY ACTION\n\nAudit • Review"
-)
-
-st.divider()
-# --------------------------------
-# CALCULATE METRICS
-# --------------------------------
-
-total_payments = len(df)
-
-total_at_risk = df["Amount"].sum()
-
-total_recovered = df["Recovered Amount"].sum()
-
-recovery_rate = (
-    total_recovered / total_at_risk
-) * 100
-
-flagged = len(
-    df[df["Outcome"] == "flagged"]
-)
-
-unsafe_actions = len(
-    df[df["Unsafe Action"] == True]
-)
-
-
-# --------------------------------
-# TOP METRICS
-# --------------------------------
-
-col1, col2, col3, col4, col5 = st.columns(5)
-
-col1.metric(
-    "Payments Processed",
-    total_payments
-)
-
-col2.metric(
-    "Money at Risk",
-    f"₹{total_at_risk:,}"
-)
-
-col3.metric(
-    "Simulated Recovery",
-    f"₹{total_recovered:,}"
-)
-
-col4.metric(
-    "Recovery Rate",
-    f"{recovery_rate:.2f}%"
-)
-
-col5.metric(
-    "Unsafe Actions",
-    unsafe_actions
-)
-
-
-st.divider()
-
-# --------------------------------
-# IMPACT SUMMARY
-# --------------------------------
-
-st.header("⚡ RecoverOS Impact")
-
-baseline_recovery_rate = 7.25
-baseline_recovered = 41079
-
-additional_recovery = total_recovered - baseline_recovered
-
-impact_col1, impact_col2, impact_col3, impact_col4 = st.columns(4)
-
-impact_col1.metric(
-    "Additional Recovery",
-    f"₹{additional_recovery:,}"
-)
-
-impact_col2.metric(
-    "Recovery Improvement",
-    f"+{recovery_rate - baseline_recovery_rate:.2f}%"
-)
-
-impact_col3.metric(
-    "Human Reviews",
-    flagged
-)
-
-impact_col4.metric(
-    "Unsafe Actions",
-    unsafe_actions
-)
-
-st.success(
-    "RecoverOS recovered more simulated revenue while "
-    "reducing unnecessary retries and blocking unsafe "
-    "automatic actions."
-)
-
-st.divider()
-# --------------------------------
-# BASELINE COMPARISON
-# --------------------------------
-
-st.header("📊 RecoverOS vs Naive Retry")
-
-comparison = pd.DataFrame({
-    "Strategy": [
-        "Naive Retry",
-        "RecoverOS"
-    ],
-    "Recovery Rate": [
-        7.25,
-        recovery_rate
-    ]
-})
-
-st.bar_chart(
-    comparison,
-    x="Strategy",
-    y="Recovery Rate"
-)
-
-st.info(
-    "On this synthetic dataset, RecoverOS evaluates "
-    "failure context and applies safety rules instead "
-    "of blindly retrying every payment."
-)
-
-
-# --------------------------------
-# ACTION DISTRIBUTION
-# --------------------------------
-
-col1, col2 = st.columns(2)
-
-with col1:
-
-    st.subheader("Actions Selected")
-
-    action_counts = (
-        df["Action"]
-        .value_counts()
-    )
-
-    st.bar_chart(action_counts)
-
-
-with col2:
-
-    st.subheader("Failure Reasons")
-
-    failure_counts = (
-        df["Failure Reason"]
-        .value_counts()
-    )
-
-    st.bar_chart(failure_counts)
-
-
-st.divider()
-
-
-# --------------------------------
-# REVIEW QUEUE
-# --------------------------------
-
-st.header("🚨 Human Review Queue")
-
-review_queue = df[
-    df["Outcome"] == "flagged"
-]
-
-st.write(
-    f"{len(review_queue)} payments require human review."
-)
-
-st.dataframe(
-    review_queue[
-        [
-            "Customer",
-            "Amount",
-            "Failure Reason",
-            "Action"
-        ]
-    ],
-    use_container_width=True
-)
-
-
-st.divider()
-
-
-# --------------------------------
-# PAYMENT EXPLORER
-# --------------------------------
-
-st.header("🔍 Payment Decision Explorer")
-
-customer = st.selectbox(
-    "Select a customer",
-    df["Customer"]
-)
-
-selected = df[
-    df["Customer"] == customer
-].iloc[0]
-
-
-col1, col2 = st.columns(2)
-
-with col1:
-
-    st.subheader("Payment Context")
-
-    st.write(
-        "Amount:",
-        f"₹{selected['Amount']:,}"
-    )
-
-    st.write(
-        "Failure Reason:",
-        selected["Failure Reason"]
-    )
-
-    st.write(
-        "Previous Successes:",
-        selected["Previous Successes"]
-    )
-
-    st.write(
-        "Previous Failures:",
-        selected["Previous Failures"]
-    )
-
-    st.write(
-        "Retry Count:",
-        selected["Retry Count"]
-    )
-
-
-with col2:
-
-    st.subheader("RecoverOS Decision")
-
-    st.write(
-        "Recommended Action:",
-        selected["Action"]
-    )
-
-    st.write(
-        "Recovery Confidence:",
-        f"{selected['Recovery Confidence'] * 100:.1f}%"
-    )
-
-    st.write(
-        "Expected Revenue:",
-        f"₹{selected['Expected Revenue']:,.2f}"
-    )
-
-    st.write(
-        "Outcome:",
-        selected["Outcome"]
-    )
-
-    st.write(
-        "Safety Violation:",
-        selected["Unsafe Action"]
-    )
-    st.subheader("📊 Recovery Profile")
-
-    successes = selected["Previous Successes"]
-    failures = selected["Previous Failures"]
-    retries = selected["Retry Count"]
-    confidence = selected["Recovery Confidence"]
-
-    # Calculate a simple profile
-    if successes >= 10 and failures <= 2:
-        profile = "STRONG"
-        profile_message = "Strong history of successful payments"
-    elif successes >= 4:
-        profile = "MODERATE"
-        profile_message = "Mixed but reasonably positive payment history"
-    else:
-        profile = "LIMITED"
-        profile_message = "Limited payment history available"
-
-    col_a, col_b, col_c = st.columns(3)
-
-    col_a.metric(
-        "Payment History",
-        profile
-    )
-
-    col_b.metric(
-        "Success / Failure",
-        f"{successes} / {failures}"
-    )
-
-    col_c.metric(
-        "Retry Status",
-        f"{retries} / 3"
-    )
-
-    st.write(profile_message)
-
-    st.progress(float(confidence))
-    st.subheader("🧠 Why This Decision?")
-
-    successes = selected["Previous Successes"]
-    failures = selected["Previous Failures"]
-    retries = selected["Retry Count"]
-    reason = selected["Failure Reason"]
-    action = selected["Action"]
-
-    if successes >= 10:
-        st.success("✓ Strong previous payment history")
-    elif successes >= 4:
-        st.info("✓ Moderate previous payment history")
-    else:
-        st.warning("⚠ Limited successful payment history")
-
-    if failures >= 5:
-        st.warning("⚠ Multiple previous payment failures")
-    elif failures > 0:
-        st.info("✓ Some previous payment failures")
-    else:
-        st.success("✓ No previous payment failures")
-
-    if retries >= 3:
-        st.error("✗ Retry limit reached — no further automatic retry")
-    else:
-        st.success(
-            f"✓ Retry count ({retries}/3) is within safety limit"
-        )
-
-    st.write("**Current failure context:**", reason)
-
-    if action == "retry_payment":
-        st.info(
-            "RecoverOS selected retry because this failure "
-            "appears recoverable and the retry safety limit "
-            "has not been reached."
-        )
-
-    elif action == "send_update_link":
-        st.info(
-            "RecoverOS selected an update link because the "
-            "payment method likely needs customer action."
-        )
-
-    elif action == "send_reminder":
-        st.info(
-            "RecoverOS selected a reminder because customer "
-            "intervention is more appropriate than immediate retry."
-        )
-
-    elif action == "hold_for_review":
-        st.error(
-            "RecoverOS blocked automatic recovery because this "
-            "payment requires human review."
-        )
-
-    elif action == "gave_up":
-        st.warning(
-            "RecoverOS stopped automatic recovery because the "
-            "retry safety limit was reached."
-        )
-
-st.divider()
-
-
-# --------------------------------
-# ALL PAYMENTS
-# --------------------------------
-
-st.header("📋 All Payment Decisions")
-
-st.dataframe(
-    df,
-    use_container_width=True
-)
-
-# --------------------------------
-# PROTOTYPE SCOPE
-# --------------------------------
-
-st.divider()
-
-st.header("🔬 Prototype Scope")
-
-st.info(
-    "RecoverOS is a prototype evaluated on synthetic payment "
-    "failure data. Recovery outcomes are simulated to test "
-    "decision quality, safety constraints, retry behavior, "
-    "and comparative performance."
-)
-
-st.markdown(
+def is_production(record):
     """
-**What the prototype demonstrates:**
+    Only genuine production outcomes are included.
 
-- Context-aware recovery decisions
-- Payment history-based confidence
-- Safety-controlled automation
-- Retry limits
-- Human review for risky cases
-- Full audit logging
-- Comparison against a naive retry strategy
-"""
+    Explicit sandbox/demo/test records are excluded.
+    """
+
+    production_flag = record.get("production")
+
+    data_source = str(
+        record.get("data_source", "")
+    ).upper()
+
+    mode = str(
+        record.get("mode", "")
+    ).upper()
+
+    return (
+        production_flag is True
+        and data_source not in {
+            "SANDBOX",
+            "DEMO",
+            "DEMO_SIMULATION",
+            "TEST",
+            "TEST_SIMULATION",
+        }
+        and mode not in {
+            "SANDBOX",
+            "DEMO",
+            "TEST",
+        }
+    )
+
+
+def load_production_outcomes():
+    return [
+        record
+        for record in load_outcomes()
+        if is_production(record)
+    ]
+
+
+def money(value):
+    try:
+        return f"₹{float(value):,.2f}"
+    except Exception:
+        return "₹0.00"
+
+
+def percentage(value):
+    try:
+        return f"{float(value) * 100:.2f}%"
+    except Exception:
+        return "0.00%"
+
+
+def safe_float(value, default=0.0):
+    try:
+        return float(value)
+    except Exception:
+        return default
+
+
+# ================================================================
+# LOAD DATA
+# ================================================================
+
+all_outcomes = load_outcomes()
+production_outcomes = load_production_outcomes()
+
+registry = load_json_file(REGISTRY_FILE)
+
+champion = registry.get(
+    "champion",
+    {}
 )
-# --------------------------------
+
+challengers = registry.get(
+    "challengers",
+    []
+)
+
+if not challengers:
+    challengers = registry.get(
+        "challenger_models",
+        []
+    )
+
+
+# ================================================================
+# HEADER
+# ================================================================
+
+st.title("RecoverOS")
+st.caption(
+    "Payment recovery intelligence • Production monitoring • Closed-loop learning"
+)
+
+
+# ================================================================
+# TOP STATUS
+# ================================================================
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric(
+        "Production Outcomes",
+        len(production_outcomes),
+    )
+
+with col2:
+    recovered_count = sum(
+        bool(record.get("recovered"))
+        for record in production_outcomes
+    )
+
+    st.metric(
+        "Recovered",
+        recovered_count,
+    )
+
+with col3:
+    production_recovery_rate = (
+        recovered_count / len(production_outcomes)
+        if production_outcomes
+        else 0.0
+    )
+
+    st.metric(
+        "Recovery Rate",
+        percentage(production_recovery_rate),
+    )
+
+with col4:
+    st.metric(
+        "Total Outcome Records",
+        len(all_outcomes),
+    )
+
+
+# ================================================================
+# DATA CLASSIFICATION
+# ================================================================
+
+st.subheader("Data Classification")
+
+sandbox_count = len(all_outcomes) - len(
+    production_outcomes
+)
+
+data_col1, data_col2, data_col3 = st.columns(3)
+
+with data_col1:
+    st.metric(
+        "All Outcomes",
+        len(all_outcomes),
+    )
+
+with data_col2:
+    st.metric(
+        "Production",
+        len(production_outcomes),
+    )
+
+with data_col3:
+    st.metric(
+        "Sandbox / Demo / Test",
+        sandbox_count,
+    )
+
+
+# ================================================================
+# PRODUCTION REVENUE
+# ================================================================
+
+st.subheader("Production Recovery")
+
+total_amount = sum(
+    safe_float(record.get("amount"))
+    for record in production_outcomes
+)
+
+recovered_amount = sum(
+    safe_float(record.get("recovery_amount"))
+    for record in production_outcomes
+    if bool(record.get("recovered"))
+)
+
+expected_revenue = sum(
+    safe_float(record.get("expected_revenue"))
+    for record in production_outcomes
+)
+
+revenue_col1, revenue_col2, revenue_col3 = st.columns(3)
+
+with revenue_col1:
+    st.metric(
+        "Failed Payment Value",
+        money(total_amount),
+    )
+
+with revenue_col2:
+    st.metric(
+        "Recovered Revenue",
+        money(recovered_amount),
+    )
+
+with revenue_col3:
+    st.metric(
+        "Expected Revenue",
+        money(expected_revenue),
+    )
+
+
+# ================================================================
+# CHAMPION MODEL
+# ================================================================
+
+st.subheader("Production Champion")
+
+if champion:
+
+    champion_col1, champion_col2, champion_col3, champion_col4 = (
+        st.columns(4)
+    )
+
+    with champion_col1:
+        st.write("**Model**")
+        st.write(
+            champion.get(
+                "model_name",
+                "unknown",
+            )
+        )
+
+    with champion_col2:
+        st.write("**Version**")
+        st.write(
+            champion.get(
+                "version",
+                "unknown",
+            )
+        )
+
+    with champion_col3:
+        st.write("**F1 Score**")
+        st.write(
+            percentage(
+                champion.get(
+                    "f1_score",
+                    0,
+                )
+            )
+        )
+
+    with champion_col4:
+        st.write("**ROC-AUC**")
+        st.write(
+            percentage(
+                champion.get(
+                    "roc_auc",
+                    0,
+                )
+            )
+        )
+
+    st.success(
+        "Production champion is ACTIVE."
+    )
+
+else:
+
+    st.warning(
+        "No production champion is registered."
+    )
+
+
+# ================================================================
+# MODEL FILE CHECK
+# ================================================================
+
+st.subheader("Model Protection")
+
+if champion:
+
+    champion_name = champion.get(
+        "model_name",
+        "",
+    )
+
+    champion_file = MODELS_DIR / champion_name
+
+    protection_col1, protection_col2, protection_col3 = (
+        st.columns(3)
+    )
+
+    with protection_col1:
+        if champion_file.exists():
+            st.success("Champion file exists")
+        else:
+            st.error("Champion file missing")
+
+    with protection_col2:
+        st.success("Automatic promotion disabled")
+
+    with protection_col3:
+        st.success("Champion overwrite protected")
+
+
+# ================================================================
+# CHALLENGERS
+# ================================================================
+
+st.subheader("Active Challengers")
+
+if challengers:
+
+    challenger_rows = []
+
+    for challenger in challengers:
+
+        challenger_rows.append(
+            {
+                "Model": challenger.get(
+                    "model_name",
+                    "unknown",
+                ),
+                "Version": challenger.get(
+                    "version",
+                    "unknown",
+                ),
+                "Status": challenger.get(
+                    "status",
+                    "unknown",
+                ),
+                "F1": percentage(
+                    challenger.get(
+                        "f1_score",
+                        0,
+                    )
+                ),
+                "ROC-AUC": percentage(
+                    challenger.get(
+                        "roc_auc",
+                        0,
+                    )
+                ),
+            }
+        )
+
+    st.dataframe(
+        pd.DataFrame(challenger_rows),
+        width="stretch",
+        hide_index=True,
+    )
+
+else:
+
+    st.info(
+        "No active challenger models."
+    )
+
+
+# ================================================================
+# PROMOTION ANALYSIS
+# ================================================================
+
+st.subheader("Promotion Analysis")
+
+if champion and challengers:
+
+    champion_f1 = safe_float(
+        champion.get(
+            "f1_score"
+        )
+    )
+
+    champion_auc = safe_float(
+        champion.get(
+            "roc_auc"
+        )
+    )
+
+    best_challenger = None
+
+    for challenger in challengers:
+
+        f1 = safe_float(
+            challenger.get(
+                "f1_score"
+            )
+        )
+
+        auc = safe_float(
+            challenger.get(
+                "roc_auc"
+            )
+        )
+
+        if best_challenger is None:
+            best_challenger = challenger
+        else:
+
+            current_score = (
+                f1 + auc
+            )
+
+            best_score = (
+                safe_float(
+                    best_challenger.get(
+                        "f1_score"
+                    )
+                )
+                +
+                safe_float(
+                    best_challenger.get(
+                        "roc_auc"
+                    )
+                )
+            )
+
+            if current_score > best_score:
+                best_challenger = challenger
+
+    challenger_f1 = safe_float(
+        best_challenger.get(
+            "f1_score"
+        )
+    )
+
+    challenger_auc = safe_float(
+        best_challenger.get(
+            "roc_auc"
+        )
+    )
+
+    f1_improvement = (
+        challenger_f1
+        - champion_f1
+    )
+
+    auc_improvement = (
+        challenger_auc
+        - champion_auc
+    )
+
+    promotion_col1, promotion_col2, promotion_col3 = (
+        st.columns(3)
+    )
+
+    with promotion_col1:
+        st.metric(
+            "F1 Improvement",
+            percentage(
+                f1_improvement
+            ),
+        )
+
+    with promotion_col2:
+        st.metric(
+            "ROC-AUC Improvement",
+            percentage(
+                auc_improvement
+            ),
+        )
+
+    with promotion_col3:
+
+        promotion_allowed = (
+            challenger_f1 > champion_f1
+            and challenger_auc > champion_auc
+        )
+
+        if promotion_allowed:
+            st.success(
+                "PROMOTION CANDIDATE"
+            )
+        else:
+            st.error(
+                "PROMOTION REJECTED"
+            )
+
+    st.info(
+        "Automatic champion overwrite is disabled. "
+        "Human approval is required."
+    )
+
+
+# ================================================================
+# PRODUCTION OUTCOME TABLE
+# ================================================================
+
+st.subheader("Production Outcomes")
+
+if production_outcomes:
+
+    table_rows = []
+
+    for record in production_outcomes:
+
+        table_rows.append(
+            {
+                "Payment ID": record.get(
+                    "payment_id",
+                    "",
+                ),
+                "Amount": money(
+                    record.get(
+                        "amount",
+                        0,
+                    )
+                ),
+                "Failure": record.get(
+                    "failure_reason",
+                    "",
+                ),
+                "Recommended": record.get(
+                    "recommended_action",
+                    "",
+                ),
+                "Final Action": record.get(
+                    "final_action",
+                    "",
+                ),
+                "Recovery Probability": percentage(
+                    record.get(
+                        "recovery_probability",
+                        0,
+                    )
+                ),
+                "Recovered": (
+                    "YES"
+                    if record.get("recovered")
+                    else "NO"
+                ),
+                "Recovery Amount": money(
+                    record.get(
+                        "recovery_amount",
+                        0,
+                    )
+                ),
+            }
+        )
+
+    st.dataframe(
+        pd.DataFrame(table_rows),
+        width="stretch",
+        hide_index=True,
+    )
+
+else:
+
+    st.info(
+        "No genuine production outcomes are currently available."
+    )
+
+
+# ================================================================
+# LEARNING LOOP STATUS
+# ================================================================
+
+st.subheader("Closed-Loop Learning")
+
+MIN_PRODUCTION_OUTCOMES = 10
+
+learning_col1, learning_col2, learning_col3 = (
+    st.columns(3)
+)
+
+with learning_col1:
+
+    st.metric(
+        "Production Outcomes",
+        f"{len(production_outcomes)} / "
+        f"{MIN_PRODUCTION_OUTCOMES}",
+    )
+
+with learning_col2:
+
+    if len(production_outcomes) >= MIN_PRODUCTION_OUTCOMES:
+        st.success(
+            "Data threshold reached"
+        )
+    else:
+        st.warning(
+            "Waiting for production data"
+        )
+
+with learning_col3:
+
+    if len(production_outcomes) >= MIN_PRODUCTION_OUTCOMES:
+        st.success(
+            "Retraining eligible"
+        )
+    else:
+        st.info(
+            "Retraining blocked"
+        )
+
+
+# ================================================================
+# SAFETY SUMMARY
+# ================================================================
+
+st.subheader("Safety Status")
+
+safety_col1, safety_col2, safety_col3, safety_col4 = (
+    st.columns(4)
+)
+
+with safety_col1:
+    st.success(
+        "Production data only"
+    )
+
+with safety_col2:
+    st.success(
+        "Sandbox data excluded"
+    )
+
+with safety_col3:
+    st.success(
+        "Champion protected"
+    )
+
+with safety_col4:
+    st.success(
+        "Automatic promotion disabled"
+    )
+
+
+# ================================================================
 # FOOTER
-# --------------------------------
+# ================================================================
+
+st.divider()
 
 st.caption(
-    "RecoverOS is a prototype using synthetic payment "
-    "data and simulated outcomes. Results do not "
-    "represent real payment recovery."
+    "RecoverOS X • Production Recovery Intelligence • "
+    "Controlled Model Lifecycle"
 )

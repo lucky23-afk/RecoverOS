@@ -1,0 +1,32 @@
+{
+  "champion": {
+    "model_name": "recovery_model.pkl",
+    "version": "v1",
+    "status": "production",
+    "accuracy": 0.8174,
+    "precision": 0.8317,
+    "recall": 0.7907,
+    "f1_score": 0.8107,
+    "roc_auc": 0.9087,
+    "created_at": "2026-09-01T19:12:00.163013",
+    "training_source": "initial_model",
+    "production_outcomes": 0
+  },
+  "challengers": [
+    {
+      "model_name": "recovery_model_challenger.pkl",
+      "version": "v2",
+      "status": "challenger",
+      "accuracy": 0.6885,
+      "precision": null,
+      "recall": null,
+      "f1_score": 0.6715867158671587,
+      "roc_auc": 0.7617946771559359,
+      "created_at": "2026-08-31T15:43:53.122429",
+      "training_source": "unknown",
+      "production_outcomes": 0
+    }
+  ],
+  "history": [],
+  "promotions": []
+}
