@@ -7,6 +7,7 @@ to estimate the probability that a failed payment will recover.
 Training data is synthetic and intended for prototype experimentation.
 """
 
+from functools import lru_cache
 from pathlib import Path
 
 import joblib
@@ -27,12 +28,20 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
 
+# ================================================================
+# PATHS
+# ================================================================
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATA_PATH = BASE_DIR / "data" / "advanced_training_data.csv"
 MODEL_DIR = BASE_DIR / "models"
 MODEL_PATH = MODEL_DIR / "recovery_model.pkl"
 
+
+# ================================================================
+# FEATURES
+# ================================================================
 
 NUMERIC_FEATURES = [
     "amount",
@@ -55,8 +64,15 @@ CATEGORICAL_FEATURES = [
     "merchant_type",
 ]
 
-FEATURES = NUMERIC_FEATURES + CATEGORICAL_FEATURES
+FEATURES = (
+    NUMERIC_FEATURES
+    + CATEGORICAL_FEATURES
+)
 
+
+# ================================================================
+# TRAINING DATA
+# ================================================================
 
 def load_training_data():
     """Load and validate the advanced training dataset."""
@@ -68,7 +84,9 @@ def load_training_data():
 
     df = pd.read_csv(DATA_PATH)
 
-    required_columns = FEATURES + ["recovered"]
+    required_columns = FEATURES + [
+        "recovered"
+    ]
 
     missing = [
         column
@@ -83,6 +101,10 @@ def load_training_data():
 
     return df
 
+
+# ================================================================
+# MODEL PIPELINE
+# ================================================================
 
 def build_pipeline():
     """Create the ML preprocessing + prediction pipeline."""
@@ -115,13 +137,23 @@ def build_pipeline():
 
     pipeline = Pipeline(
         steps=[
-            ("preprocessor", preprocessor),
-            ("classifier", classifier),
+            (
+                "preprocessor",
+                preprocessor,
+            ),
+            (
+                "classifier",
+                classifier,
+            ),
         ]
     )
 
     return pipeline
 
+
+# ================================================================
+# TRAIN
+# ================================================================
 
 def train_model():
     """Train, evaluate and save the recovery model."""
@@ -131,20 +163,30 @@ def train_model():
     X = df[FEATURES]
     y = df["recovered"]
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X,
-        y,
-        test_size=0.20,
-        random_state=42,
-        stratify=y,
+    X_train, X_test, y_train, y_test = (
+        train_test_split(
+            X,
+            y,
+            test_size=0.20,
+            random_state=42,
+            stratify=y,
+        )
     )
 
     model = build_pipeline()
 
-    model.fit(X_train, y_train)
+    model.fit(
+        X_train,
+        y_train,
+    )
 
-    predictions = model.predict(X_test)
-    probabilities = model.predict_proba(X_test)[:, 1]
+    predictions = model.predict(
+        X_test
+    )
+
+    probabilities = model.predict_proba(
+        X_test
+    )[:, 1]
 
     accuracy = accuracy_score(
         y_test,
@@ -176,20 +218,42 @@ def train_model():
 
     print()
     print("=" * 60)
-    print("RecoverOS X - Recovery Prediction Engine")
+    print(
+        "RecoverOS X - Recovery Prediction Engine"
+    )
     print("=" * 60)
 
-    print(f"Training records : {len(X_train)}")
-    print(f"Testing records  : {len(X_test)}")
+    print(
+        f"Training records : {len(X_train)}"
+    )
+
+    print(
+        f"Testing records  : {len(X_test)}"
+    )
 
     print()
     print("Model Performance")
     print("-" * 60)
-    print(f"Accuracy         : {accuracy:.2%}")
-    print(f"Precision        : {precision:.2%}")
-    print(f"Recall           : {recall:.2%}")
-    print(f"F1 Score         : {f1:.2%}")
-    print(f"ROC-AUC          : {roc_auc:.2%}")
+
+    print(
+        f"Accuracy         : {accuracy:.2%}"
+    )
+
+    print(
+        f"Precision        : {precision:.2%}"
+    )
+
+    print(
+        f"Recall           : {recall:.2%}"
+    )
+
+    print(
+        f"F1 Score         : {f1:.2%}"
+    )
+
+    print(
+        f"ROC-AUC          : {roc_auc:.2%}"
+    )
 
     print()
     print("Classification Report")
@@ -212,16 +276,34 @@ def train_model():
         MODEL_PATH,
     )
 
+    # Clear cached model so a newly trained model
+    # will be loaded on the next prediction.
+    load_model.cache_clear()
+
     print("-" * 60)
-    print("Model saved successfully:")
+    print(
+        "Model saved successfully:"
+    )
+
     print(MODEL_PATH)
+
     print("=" * 60)
 
     return model
 
 
+# ================================================================
+# MODEL LOADING
+# ================================================================
+
+@lru_cache(maxsize=1)
 def load_model():
-    """Load the trained RecoverOS X model."""
+    """
+    Load the trained RecoverOS X model once.
+
+    The loaded model is cached in memory so repeated predictions
+    do not repeatedly read the .pkl file from disk.
+    """
 
     if not MODEL_PATH.exists():
         raise FileNotFoundError(
@@ -229,16 +311,33 @@ def load_model():
             "Run: python app\\ml_model.py"
         )
 
-    return joblib.load(
+    print(
+        f"[RecoverOS] Loading model: {MODEL_PATH}"
+    )
+
+    model = joblib.load(
         MODEL_PATH
     )
 
+    print(
+        "[RecoverOS] Model loaded into memory."
+    )
 
-def predict_recovery_probability(payment):
+    return model
+
+
+# ================================================================
+# PREDICTION
+# ================================================================
+
+def predict_recovery_probability(
+    payment
+):
     """
     Predict recovery probability for one payment.
 
-    `payment` should be a dictionary containing all FEATURES.
+    `payment` should be a dictionary containing
+    all required FEATURES.
     """
 
     model = load_model()
@@ -251,8 +350,14 @@ def predict_recovery_probability(payment):
         row[FEATURES]
     )[0][1]
 
-    return float(probability)
+    return float(
+        probability
+    )
 
+
+# ================================================================
+# MAIN
+# ================================================================
 
 if __name__ == "__main__":
     train_model()

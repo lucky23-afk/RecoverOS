@@ -1,5 +1,40 @@
+# Python
 __pycache__/
 *.pyc
-.streamlit/
+*.pyo
+*.pyd
+
+# Virtual environments
 venv/
 .venv/
+env/
+
+# Streamlit
+.streamlit/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# SQLite / local database
+*.db
+*.db-shm
+*.db-wal
+
+# Runtime / generated logs
+data/*.jsonl
+data/*.wav
+
+# Evaluation outputs
+data/batch_evaluation.json
+data/recovery_experiment_1000.csv
+batch_result.txt
+
+# Archives
+*.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

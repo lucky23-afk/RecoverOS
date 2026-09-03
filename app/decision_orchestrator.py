@@ -1,10 +1,7 @@
-
-
 from pathlib import Path
 import sys
 from datetime import datetime, timezone
 import json
-
 
 # ================================================================
 # PATH SETUP
@@ -23,14 +20,15 @@ if str(APP_DIR) not in sys.path:
 # ================================================================
 
 from ml_model import predict_recovery_probability
-from strategy_optimizer import optimize_strategy
+from erv_optimizer import optimize_recovery_action
 from policy_engine import evaluate_policy
 from safety_engine import evaluate_safety
 
-# Recovery memory is optional so the main pipeline does not crash
-# if the memory module is temporarily unavailable.
+
+# Recovery memory is advisory only.
 try:
     from recovery_memory import recommend_from_memory
+
     MEMORY_AVAILABLE = True
 except ImportError:
     recommend_from_memory = None
@@ -48,14 +46,7 @@ AUDIT_FILE = DATA_DIR / "decision_audit.jsonl"
 # HELPERS
 # ================================================================
 
-def print_line():
-    print("-" * 70)
-
-
 def get_value(obj, key, default=None):
-    """
-    Supports both dictionary-style and object-style results.
-    """
     if isinstance(obj, dict):
         return obj.get(key, default)
 
@@ -63,18 +54,68 @@ def get_value(obj, key, default=None):
 
 
 def save_audit(record):
-    """
-    Save one decision to the audit log.
-    """
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
-    with open(AUDIT_FILE, "a", encoding="utf-8") as file:
+    with open(
+        AUDIT_FILE,
+        "a",
+        encoding="utf-8",
+    ) as file:
         file.write(
             json.dumps(
                 record,
-                ensure_ascii=False
-            ) + "\n"
+                ensure_ascii=False,
+            )
+            + "\n"
         )
+
+
+def print_line():
+    print("-" * 70)
+
+
+# ================================================================
+# POLICY-CONSTRAINED ERV SELECTION
+# ================================================================
+
+def choose_policy_allowed_action(
+    ranked_actions,
+    allowed_actions,
+):
+    """
+    ERV ranks actions economically.
+
+    Policy acts as a hard constraint.
+
+    The highest-ERV action that policy permits is selected.
+    """
+
+    allowed = set(
+        allowed_actions or []
+    )
+
+    candidates = [
+        action
+        for action in ranked_actions
+        if action.get("action") in allowed
+    ]
+
+    if not candidates:
+        return {
+            "action": "hold_for_review",
+            "expected_recovered_value": 0.0,
+        }
+
+    return max(
+        candidates,
+        key=lambda row: row.get(
+            "expected_recovered_value",
+            0.0,
+        ),
+    )
 
 
 # ================================================================
@@ -87,38 +128,77 @@ def run_orchestrator(payment):
     print("=" * 70)
 
     # ============================================================
-    # 1. ML PREDICTION
+    # 1. ML MODEL
     # ============================================================
 
-    recovery_probability = predict_recovery_probability(payment)
-
-    # ============================================================
-    # 2. STRATEGY OPTIMIZER
-    # ============================================================
-
-    best_strategy, all_strategies = optimize_strategy(
-        amount=float(payment["amount"]),
-        recovery_probability=float(recovery_probability),
-        retry_count=int(payment.get("retry_count", 0)),
-        risk_score=float(payment.get("risk_score", 0.0)),
+    recovery_probability = (
+        predict_recovery_probability(
+            payment
+        )
     )
 
-    optimizer_action = best_strategy.action
+    recovery_probability = float(
+        recovery_probability
+    )
 
     # ============================================================
-    # 3. DETERMINISTIC POLICY
+    # 2. ERV OPTIMIZER
+    # ============================================================
+
+    erv_result = optimize_recovery_action(
+        amount=float(
+            payment["amount"]
+        ),
+        recovery_probability=
+            recovery_probability,
+        failure_reason=payment.get(
+            "failure_reason",
+            "",
+        ),
+        retry_count=int(
+            payment.get(
+                "retry_count",
+                0,
+            )
+        ),
+        risk_score=float(
+            payment.get(
+                "risk_score",
+                0.0,
+            )
+        ),
+    )
+
+    optimizer_action = (
+        erv_result["action"]
+    )
+
+    ranked_actions = (
+        erv_result["ranked_actions"]
+    )
+
+    # ============================================================
+    # 3. POLICY
     # ============================================================
 
     policy_result = evaluate_policy(
-        payment,
-        int(payment.get("retry_count", 0)),
-        float(recovery_probability),
+        payment.get(
+            "failure_reason",
+            "",
+        ),
+        int(
+            payment.get(
+                "retry_count",
+                0,
+            )
+        ),
+        recovery_probability,
     )
 
     policy_decision = get_value(
         policy_result,
         "decision",
-        "BLOCK",
+        "REVIEW",
     )
 
     allowed_actions = get_value(
@@ -136,33 +216,30 @@ def run_orchestrator(payment):
     if allowed_actions is None:
         allowed_actions = []
 
+    if policy_reasons is None:
+        policy_reasons = []
+
     # ============================================================
-    # 4. POLICY-CONSTRAINED OPTIMIZATION
+    # 4. POLICY-CONSTRAINED ERV
     # ============================================================
 
-    allowed_set = set(allowed_actions)
+    policy_best = (
+        choose_policy_allowed_action(
+            ranked_actions,
+            allowed_actions,
+        )
+    )
 
-    policy_approved_strategies = [
-        strategy
-        for strategy in all_strategies
-        if strategy.action in allowed_set
+    policy_action = policy_best[
+        "action"
     ]
 
-    if policy_approved_strategies:
-        policy_best_strategy = max(
-            policy_approved_strategies,
-            key=lambda strategy: strategy.score,
+    policy_expected_revenue = (
+        policy_best.get(
+            "expected_recovered_value",
+            0.0,
         )
-
-        policy_action = policy_best_strategy.action
-        policy_expected_revenue = (
-            policy_best_strategy.expected_revenue
-        )
-
-    else:
-        policy_action = "hold_for_review"
-
-        policy_expected_revenue = 0.0
+    )
 
     # ============================================================
     # 5. RECOVERY MEMORY
@@ -174,8 +251,10 @@ def run_orchestrator(payment):
 
     if MEMORY_AVAILABLE:
         try:
-            memory_result = recommend_from_memory(
-                payment
+            memory_result = (
+                recommend_from_memory(
+                    payment
+                )
             )
 
             if memory_result:
@@ -192,53 +271,45 @@ def run_orchestrator(payment):
                         None,
                     )
 
-                memory_recovery_rate = get_value(
-                    memory_result,
-                    "historical_recovery",
-                    None,
+                memory_recovery_rate = (
+                    get_value(
+                        memory_result,
+                        "historical_recovery",
+                        None,
+                    )
                 )
 
-                memory_revenue = get_value(
-                    memory_result,
-                    "recovered_revenue",
-                    None,
+                memory_revenue = (
+                    get_value(
+                        memory_result,
+                        "recovered_revenue",
+                        None,
+                    )
                 )
 
         except Exception:
-            # Memory must never break the decision pipeline.
+            # Memory is advisory and must never break
+            # the financial decision pipeline.
             memory_action = None
 
     # ============================================================
-    # 6. MEMORY-AWARE ACTION SELECTION
+    # AUTHORITATIVE PATH
+    #
+    # ML -> ERV -> POLICY
+    #
+    # Memory does not override this path.
     # ============================================================
-
-    #
-    # Memory is advisory only.
-    #
-    # It can influence the decision only if:
-    #
-    # 1. The action is allowed by policy.
-    # 2. Safety later approves it.
-    #
-    # Otherwise the policy optimizer remains the source of truth.
-    #
 
     candidate_action = policy_action
 
-    if (
-        memory_action
-        and memory_action in allowed_set
-    ):
-        candidate_action = memory_action
-
     # ============================================================
-    # 7. SAFETY ENGINE
+    # 6. SAFETY
     # ============================================================
 
     safety_result = evaluate_safety(
         payment=payment,
         recommended_action=candidate_action,
-        recovery_probability=float(recovery_probability),
+        recovery_probability=recovery_probability,
     )
 
     safety_decision = get_value(
@@ -263,42 +334,67 @@ def run_orchestrator(payment):
         safety_reasons = []
 
     # ============================================================
-    # 8. FINAL DECISION
+    # 7. FINAL ACTION
+    #
+    # IMPORTANT:
+    # ALLOW  -> recommended action
+    # REVIEW -> human review
+    # BLOCK  -> blocked
+    #
+    # REVIEW must NOT be converted to BLOCK.
     # ============================================================
 
-    if str(safety_decision).upper() == "ALLOW":
+    normalized_safety_decision = str(
+        safety_decision
+    ).upper()
+
+    if normalized_safety_decision == "ALLOW":
         final_action = safety_final_action
+
+    elif normalized_safety_decision == "REVIEW":
+        final_action = "hold_for_review"
+
     else:
         final_action = "blocked"
 
     # ============================================================
-    # 9. INTEGRITY CHECK
+    # 8. INTEGRITY CHECK
     # ============================================================
 
     integrity_valid = True
-    integrity_reason = "Decision integrity checks passed."
 
-    if policy_decision == "BLOCK":
-        if final_action not in {"hold_for_review", "blocked"}:
-            integrity_valid = False
-            integrity_reason = (
-                "Final action violates blocked policy."
-            )
+    integrity_reason = (
+        "Decision integrity checks passed."
+    )
 
+    # Final executable action must be policy-approved.
     if (
         final_action != "blocked"
-        and final_action not in allowed_set
+        and final_action
+        not in set(allowed_actions)
     ):
         integrity_valid = False
+
         integrity_reason = (
             "Final action is not permitted by policy."
+        )
+
+    # Safety remains the final authority.
+    if (
+        normalized_safety_decision == "BLOCK"
+        and final_action != "blocked"
+    ):
+        integrity_valid = False
+
+        integrity_reason = (
+            "Final action violates safety decision."
         )
 
     if not integrity_valid:
         final_action = "blocked"
 
     # ============================================================
-    # 10. DISPLAY
+    # 9. DISPLAY
     # ============================================================
 
     print()
@@ -307,22 +403,32 @@ def run_orchestrator(payment):
 
     print(
         f"ML probability       : "
-        f"{float(recovery_probability):.2%}"
+        f"{recovery_probability:.2%}"
     )
 
     print(
-        f"Optimizer action     : "
+        f"ERV optimizer        : "
         f"{optimizer_action}"
     )
 
     print(
-        f"Policy action        : "
+        f"Policy allowed       : "
+        f"{', '.join(allowed_actions)}"
+    )
+
+    print(
+        f"Policy-selected ERV  : "
         f"{policy_action}"
+    )
+
+    print(
+        f"Expected recovered   : "
+        f"₹{policy_expected_revenue:,.2f}"
     )
 
     if memory_action:
         print(
-            f"Memory recommendation: "
+            f"Memory advisory      : "
             f"{memory_action}"
         )
 
@@ -351,50 +457,88 @@ def run_orchestrator(payment):
     )
 
     # ============================================================
-    # 11. AUDIT RECORD
+    # 10. AUDIT
     # ============================================================
 
     audit_record = {
-        "timestamp": datetime.now(
-            timezone.utc
-        ).isoformat(),
+        "timestamp":
+            datetime.now(
+                timezone.utc
+            ).isoformat(),
 
-        "payment_id": payment.get(
-            "payment_id"
-        ),
+        "payment_id":
+            payment.get(
+                "payment_id"
+            ),
 
-        "amount": float(
-            payment.get("amount", 0.0)
-        ),
+        "amount":
+            float(
+                payment.get(
+                    "amount",
+                    0.0,
+                )
+            ),
 
-        "failure_reason": payment.get(
-            "failure_reason"
-        ),
+        "failure_reason":
+            payment.get(
+                "failure_reason"
+            ),
 
-        "recovery_probability": float(
-            recovery_probability
-        ),
+        "recovery_probability":
+            recovery_probability,
 
-        "optimizer_action": optimizer_action,
+        "optimizer_action":
+            optimizer_action,
 
-        "policy_decision": policy_decision,
+        "erv_expected_recovered_value":
+            erv_result.get(
+                "expected_recovered_value",
+                0.0,
+            ),
 
-        "policy_action": policy_action,
+        "erv_ranked_actions":
+            ranked_actions,
 
-        "memory_action": memory_action,
+        "policy_decision":
+            policy_decision,
 
-        "safety_decision": safety_decision,
+        "policy_allowed_actions":
+            allowed_actions,
 
-        "safety_action": safety_final_action,
+        "policy_action":
+            policy_action,
 
-        "final_action": final_action,
+        "policy_expected_recovered_value":
+            policy_expected_revenue,
 
-        "integrity_valid": integrity_valid,
+        "memory_action":
+            memory_action,
 
-        "integrity_reason": integrity_reason,
+        "memory_recovery_rate":
+            memory_recovery_rate,
+
+        "memory_revenue":
+            memory_revenue,
+
+        "safety_decision":
+            safety_decision,
+
+        "safety_action":
+            safety_final_action,
+
+        "final_action":
+            final_action,
+
+        "integrity_valid":
+            integrity_valid,
+
+        "integrity_reason":
+            integrity_reason,
     }
 
-    save_audit(audit_record)
+    save_audit(
+        audit_record
+    )
 
     print()
     print("AUDIT")
@@ -406,60 +550,133 @@ def run_orchestrator(payment):
     )
 
     print()
+
     print("=" * 70)
-    print("RecoverOS X decision orchestration completed.")
+    print(
+        "RecoverOS X decision orchestration completed."
+    )
     print("=" * 70)
 
+    # ============================================================
+    # API / OTHER MODULES
+    # ============================================================
+
     return {
-        "payment": payment,
-        "recovery_probability": recovery_probability,
-        "optimizer_action": optimizer_action,
-        "policy_decision": policy_decision,
-        "policy_action": policy_action,
-        "memory_action": memory_action,
-        "safety_decision": safety_decision,
-        "safety_action": safety_final_action,
-        "final_action": final_action,
-        "integrity_valid": integrity_valid,
-        "integrity_reason": integrity_reason,
-        "expected_revenue": policy_expected_revenue,
-        "policy_reasons": policy_reasons,
-        "safety_reasons": safety_reasons,
+        "payment":
+            payment,
+
+        "recovery_probability":
+            recovery_probability,
+
+        "optimizer_action":
+            optimizer_action,
+
+        "erv_expected_recovered_value":
+            erv_result.get(
+                "expected_recovered_value",
+                0.0,
+            ),
+
+        "erv_ranked_actions":
+            ranked_actions,
+
+        "policy_decision":
+            policy_decision,
+
+        "policy_allowed_actions":
+            allowed_actions,
+
+        "policy_action":
+            policy_action,
+
+        "memory_action":
+            memory_action,
+
+        "safety_decision":
+            safety_decision,
+
+        "safety_action":
+            safety_final_action,
+
+        "final_action":
+            final_action,
+
+        "integrity_valid":
+            integrity_valid,
+
+        "integrity_reason":
+            integrity_reason,
+
+        "expected_revenue":
+            policy_expected_revenue,
+
+        "policy_reasons":
+            policy_reasons,
+
+        "safety_reasons":
+            safety_reasons,
     }
 
 
 # ================================================================
-# DEMO PAYMENT
+# LOCAL DEMO
 # ================================================================
 
 if __name__ == "__main__":
 
     payment = {
-        "payment_id": "PX000001",
-        "amount": 2500,
+        "payment_id":
+            "PX000001",
 
-        "failure_reason": "bank_timeout",
-        "payment_method": "netbanking",
-        "merchant_type": "saas",
+        "amount":
+            2500,
 
-        "previous_successes": 8,
-        "previous_failures": 1,
-        "retry_count": 1,
+        "failure_reason":
+            "bank_timeout",
 
-        "days_since_last_payment": 12,
-        "customer_tenure_months": 18,
-        "mandate_age_days": 240,
+        "payment_method":
+            "netbanking",
 
-        "average_amount": 2300,
-        "amount_vs_average": 1.087,
+        "merchant_type":
+            "saas",
 
-        "recent_success_rate": 0.89,
-        "failure_frequency": 0.05,
+        "previous_successes":
+            8,
 
-        "retry_interval_hours": 6,
+        "previous_failures":
+            1,
 
-        "risk_score": 0.10,
+        "retry_count":
+            1,
+
+        "days_since_last_payment":
+            12,
+
+        "customer_tenure_months":
+            18,
+
+        "mandate_age_days":
+            240,
+
+        "average_amount":
+            2300,
+
+        "amount_vs_average":
+            1.087,
+
+        "recent_success_rate":
+            0.89,
+
+        "failure_frequency":
+            0.05,
+
+        "retry_interval_hours":
+            6,
+
+        "risk_score":
+            0.10,
     }
 
-    run_orchestrator(payment)
-
+    run_orchestrator(
+        payment
+    )

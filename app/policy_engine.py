@@ -9,8 +9,13 @@ class PolicyResult:
     reasons: list
 
 
-def classify_failure(failure_reason: str) -> str:
-    reason = str(failure_reason).lower()
+def classify_failure(
+    failure_reason: str,
+) -> str:
+
+    reason = str(
+        failure_reason
+    ).lower()
 
     transient_failures = {
         "bank_timeout",
@@ -53,42 +58,53 @@ def evaluate_policy(
     recovery_probability: float,
 ) -> PolicyResult:
 
-    category = classify_failure(failure_reason)
+    category = classify_failure(
+        failure_reason
+    )
 
     allowed_actions = []
     reasons = []
 
-    # ---------------------------------------------------------
-    # RISK / SUSPICIOUS PAYMENTS
-    # ---------------------------------------------------------
+    # ============================================================
+    # RISK
+    # ============================================================
+
     if category == "RISK":
+
         return PolicyResult(
             decision="REVIEW",
             failure_category=category,
-            allowed_actions=["hold_for_review"],
+            allowed_actions=[
+                "hold_for_review"
+            ],
             reasons=[
                 "Risk-related failure detected.",
                 "Automatic recovery actions are prohibited.",
             ],
         )
 
-    # ---------------------------------------------------------
-    # UNKNOWN FAILURE
-    # ---------------------------------------------------------
+    # ============================================================
+    # UNKNOWN
+    # ============================================================
+
     if category == "UNKNOWN":
+
         return PolicyResult(
             decision="REVIEW",
             failure_category=category,
-            allowed_actions=["hold_for_review"],
+            allowed_actions=[
+                "hold_for_review"
+            ],
             reasons=[
                 "Unknown failure category.",
                 "Human review required before recovery.",
             ],
         )
 
-    # ---------------------------------------------------------
-    # TRANSIENT FAILURE
-    # ---------------------------------------------------------
+    # ============================================================
+    # TRANSIENT
+    # ============================================================
+
     if category == "TRANSIENT":
 
         allowed_actions = [
@@ -102,14 +118,23 @@ def evaluate_policy(
         )
 
         if retry_count >= 3:
-            allowed_actions.remove("retry_payment")
+
+            if "retry_payment" in allowed_actions:
+                allowed_actions.remove(
+                    "retry_payment"
+                )
+
             reasons.append(
                 "Retry limit reached: automatic retry is prohibited."
             )
 
         if recovery_probability < 0.20:
+
             if "retry_payment" in allowed_actions:
-                allowed_actions.remove("retry_payment")
+
+                allowed_actions.remove(
+                    "retry_payment"
+                )
 
             reasons.append(
                 "Recovery probability is below the retry threshold."
@@ -122,9 +147,10 @@ def evaluate_policy(
             reasons=reasons,
         )
 
-    # ---------------------------------------------------------
-    # CUSTOMER ACTION REQUIRED
-    # ---------------------------------------------------------
+    # ============================================================
+    # CUSTOMER ACTION
+    # ============================================================
+
     if category == "CUSTOMER_ACTION":
 
         allowed_actions = [
@@ -144,13 +170,16 @@ def evaluate_policy(
             reasons=reasons,
         )
 
-    # ---------------------------------------------------------
+    # ============================================================
     # FALLBACK
-    # ---------------------------------------------------------
+    # ============================================================
+
     return PolicyResult(
         decision="REVIEW",
         failure_category=category,
-        allowed_actions=["hold_for_review"],
+        allowed_actions=[
+            "hold_for_review"
+        ],
         reasons=[
             "Policy could not safely classify the payment."
         ],
@@ -160,7 +189,9 @@ def evaluate_policy(
 if __name__ == "__main__":
 
     print("=" * 68)
-    print("RecoverOS X - Deterministic Policy Engine")
+    print(
+        "RecoverOS X - Deterministic Policy Engine"
+    )
     print("=" * 68)
 
     result = evaluate_policy(
@@ -169,21 +200,34 @@ if __name__ == "__main__":
         recovery_probability=0.82,
     )
 
-    print(f"Failure category   : {result.failure_category}")
-    print(f"Policy decision    : {result.decision}")
+    print(
+        f"Failure category   : "
+        f"{result.failure_category}"
+    )
+
+    print(
+        f"Policy decision    : "
+        f"{result.decision}"
+    )
 
     print()
+
     print("Allowed actions")
     print("-" * 68)
 
     for action in result.allowed_actions:
-        print(f" - {action}")
+        print(
+            f" - {action}"
+        )
 
     print()
+
     print("Policy reasons")
     print("-" * 68)
 
     for reason in result.reasons:
-        print(f" - {reason}")
+        print(
+            f" - {reason}"
+        )
 
     print("=" * 68)
