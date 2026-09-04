@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 from __future__ import annotations
 
 from pathlib import Path
@@ -78,6 +79,16 @@ app = FastAPI(
     version="2.0.0",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://recover-os-delta.vercel.app",
+        "https://recover-57vdsj5uo-lucky-78b4.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # =================================================================
 # CORS
