@@ -82,28 +82,14 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://recover-os-delta.vercel.app",
-        "https://recover-57vdsj5uo-lucky-78b4.vercel.app",
     ],
+    allow_origin_regex=r"^https://.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# =================================================================
-# CORS
-# =================================================================
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-app.include_router(voice_router)
 
 # =================================================================
 # STARTUP
