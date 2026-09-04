@@ -1,397 +1,423 @@
-# RecoverOS
+RecoverOS
 
-### A smarter way to handle failed recurring payments
+AI-powered revenue recovery platform for detecting at-risk payments, selecting the right intervention, and executing bounded recovery workflows.
 
-RecoverOS is an AI-assisted payment recovery prototype built for the **Razorpay Buildathon – Revenue Recovery track**.
+RecoverOS is a hackathon-built revenue recovery system created for the Razorpay Buildathon — Track 03: AI Revenue Recovery.
 
-Instead of blindly retrying every failed payment, RecoverOS evaluates payment context, predicts recovery probability, selects a recovery strategy, applies policy and safety controls, validates the final decision, and records the outcome for future analysis.
+It combines machine learning, expected recovered value (ERV) optimization, policy controls, safety checks, recovery workflows, auditability, and a web interface into one decisioning platform.
 
----
+🚀 What RecoverOS Does
 
-## The problem
+RecoverOS helps merchants identify revenue at risk and decide what to do next:
 
-Not all failed payments are the same.
+Detect → Predict → Optimize → Validate → Recover → Audit
 
-- A temporary bank timeout may be worth retrying.
-- Insufficient funds may require a payment-method update.
-- Risky or suspicious cases may need human review.
-- Blind retries can waste attempts and create unsafe automation.
+It supports recovery workflows for:
 
-RecoverOS takes a context-aware approach:
+💳 Payment failures
 
-```text
-Failure Context
-      ↓
-Recovery Prediction
-      ↓
-Strategy Selection
-      ↓
-Policy Rules
-      ↓
-Safety Controls
-      ↓
-Final Decision
-      ↓
-Audit + Outcome
-      ↓
-Controlled Learning
-Key features
-ML-based recovery probability prediction
-Context-aware recovery strategy selection
-Policy enforcement
-Safety guardrails
-Decision integrity validation
-Audit logging
-Outcome intelligence
-Production-data filtering
-Controlled challenger-model retraining
-Model registry
-Strict promotion gate
-Human-approved model promotion
-Streamlit monitoring dashboard
-System architecture
-Failed Payment
-      │
-      ▼
-Payment / Customer Context
-      │
-      ▼
-ML Recovery Prediction
-      │
-      ▼
-Strategy Optimizer
-      │
-      ▼
-Policy Engine
-      │
-      ▼
-Safety Engine
-      │
-      ▼
-Decision Orchestrator
-      │
-      ▼
-Integrity Validation
-      │
-      ▼
-Audit Log
-      │
-      ▼
-Outcome Recording
-      │
-      ▼
-Production Feedback
-      │
-      ▼
-Controlled Retraining
-      │
-      ▼
-Challenger Model
-      │
-      ▼
-Promotion Gate
-      │
-      ▼
-Human Approval
-      │
-      ▼
-Production Champion
-Recovery actions
+🔄 Failed subscriptions
 
-RecoverOS can select actions such as:
+🏦 Mandate retries
+
+🛒 Checkout abandonment
+
+🧾 B2B receivables
+
+🎙️ Hinglish voice recovery
+
+🤝 Promise-to-pay tracking
+
+🧠 Core Decision Flow
+
+Payment / Customer Data
+          ↓
+   ML Recovery Prediction
+          ↓
+ Expected Recovered Value
+          ↓
+     Policy Engine
+          ↓
+     Safety Engine
+          ↓
+   Final Recovery Action
+          ↓
+ ┌────────┼────────────┐
+ ↓        ↓            ↓
+Retry   Update Link   Review
+          ↓
+      Audit Trail
+
+RecoverOS does not blindly retry payments. Every action is constrained by recovery probability, failure context, retry limits, policy rules, risk checks, and stopping conditions.
+
+✨ Key Features
+
+AI Recovery Decisioning
+
+The champion Random Forest model predicts recovery probability from payment and customer context including:
+
+Payment amount
+
+Failure reason
+
+Payment method
+
+Merchant type
+
+Previous successes and failures
+
+Retry count
+
+Days since last payment
+
+Customer tenure
+
+Mandate age
+
+Average payment amount
+
+Amount vs. average
+
+Recent success rate
+
+Failure frequency
+
+Retry interval
+
+Expected Recovered Value (ERV)
+
+RecoverOS evaluates candidate actions using expected recovered value instead of probability alone.
+
+Supported actions include:
 
 retry_payment
+
 send_update_link
+
 send_reminder
+
 hold_for_review
 
-The ML model recommends based on recovery probability and payment context, while policy and safety layers can override unsafe recommendations.
+The optimizer considers recovery probability, action effectiveness, risk penalties, retry constraints, and review requirements.
 
-Machine learning
+Policy Engine
 
-The current baseline model is:
+Failure scenarios are classified into categories such as:
 
-Model    : recovery_model.pkl
-Version  : v1
-Status   : production
-Baseline performance
-Metric	Score
-Accuracy	81.74%
-Precision	83.17%
-Recall	79.07%
-F1 Score	81.07%
-ROC-AUC	90.87%
+Transient — temporary payment/network failures
 
-These are baseline evaluation metrics and are not presented as guaranteed real-world production performance.
+Customer Action — cases requiring a payment-method update or customer action
 
-Example decision
-ML probability       : 84.71%
-Optimizer action     : send_update_link
-Policy action        : hold_for_review
-Safety decision      : ALLOW
-Final action         : hold_for_review
+Risk — suspicious or potentially unsafe cases
 
-RecoverOS also validates the decision chain:
+Unknown — cases that require review rather than automated recovery
 
-Integrity valid : True
-Reason          : Decision integrity checks passed.
-Safety guardrails
+The policy layer determines which actions are permitted.
 
-RecoverOS is designed so that the ML model does not directly control the final action.
+Safety Engine
 
-Safety controls include:
+RecoverOS adds a second safety boundary before an action is finalized.
 
-retry-limit enforcement
-human-review routing
-suspicious-case protection
-decision integrity checks
-audit logging
-production-data isolation
-champion-model protection
-human approval for model promotion
+Controls include:
 
-The goal is not maximum retries.
+Maximum retry limits
 
-The goal is controlled and explainable recovery.
+Low-probability review
 
-Outcome intelligence
+Suspicious-reversal review
 
-The outcome engine analyzes:
+Recently changed mandate review
 
-total decisions
-recovered payments
-recovery rate
-average ML prediction
-prediction error
-recovered revenue
-strategy performance
-failure categories
-learning signals
-Closed-loop learning
+High-value payment review
 
-RecoverOS supports a controlled learning cycle:
+Explicit block/review outcomes
 
-Decision
-   ↓
-Observed Outcome
-   ↓
-Production Feedback
-   ↓
-Retraining
-   ↓
-Challenger Model
-   ↓
-Promotion Gate
-   ↓
-Human Approval
-   ↓
-New Champion
-Production data protection
+Policy and safety integrity checks
 
-Production learning requires explicit production classification.
+Recovery Workflows
 
-Example:
+Dedicated modules handle:
 
-{
-  "production": true,
-  "data_source": "PRODUCTION"
-}
+Subscription recovery
 
-Sandbox, demo, test, and simulated records are excluded from production retraining.
+Mandate retry sequencing
 
-This prevents simulated outcomes from being presented as genuine production evidence.
+Checkout follow-ups
 
-Current learning state
+Receivables escalation
 
-Current repository state:
+Voice recovery
 
-Total outcome records : 30
-Production outcomes   : 1
-Sandbox/demo outcomes  : 29
+Promise-to-pay tracking
 
-Production retraining requires at least:
+Auditability
 
-10 genuine production outcomes
+Decision records capture the important parts of the decision chain:
 
-Current state:
+ML recovery probability
 
-WAITING_FOR_DATA
+Optimizer recommendation
 
-This is intentional.
+Expected recovered value
 
-The system does not convert simulated outcomes into production evidence simply to satisfy the training threshold.
+Policy decision
 
-Model lifecycle
-Production Champion
-        │
-        ▼
-Production Outcomes
-        │
-        ▼
-Production Feedback
-        │
-        ▼
-Controlled Retraining
-        │
-        ▼
-Challenger
-        │
-        ▼
-Promotion Gate
-        │
-        ├── Reject
-        │
-        └── Candidate
-                │
-                ▼
-          Human Approval
-                │
-                ▼
-          Champion Backup
-                │
-                ▼
-          New Champion
+Safety decision
 
-Automatic champion overwrite is disabled.
+Final action
 
-Dashboard
+Decision reasons
 
-The Streamlit dashboard provides:
+Integrity status
 
-recovery metrics
-recovered revenue
-outcome analysis
-champion model information
-challenger information
-promotion status
-production-data status
-safety status
-production outcomes
-Run
-streamlit run app\dashboard.py
+📊 Model Performance
 
-Then open the local Streamlit URL, normally:
+The current champion model is stored at:
 
-http://localhost:8501
-Project structure
-recoveros/
-│
+models/recovery_model.pkl
+
+The repository's model evaluation reports:
+
+Metric
+
+Result
+
+Records
+
+10,000
+
+Features
+
+15
+
+Accuracy
+
+81.74%
+
+Precision
+
+83.17%
+
+Recall
+
+79.07%
+
+F1 Score
+
+81.07%
+
+ROC-AUC
+
+90.87%
+
+The champion artifact is treated as a controlled model and is not retrained during normal application execution.
+
+🛡️ Production-Safety Design
+
+RecoverOS is designed around bounded automation, not unrestricted autonomous payment execution.
+
+High-risk or low-confidence scenarios can be routed to human review. The system also contains production-feedback and retraining gates so that real production evidence is required before production learning is allowed.
+
+The current project should be considered a hackathon prototype. It does not claim real-world Razorpay recovery amounts or live Razorpay transaction execution.
+
+🧪 Evaluation
+
+A batch evaluation framework is included in the repository to compare recovery strategies over controlled cases and measure:
+
+Revenue at risk
+
+Recovered revenue
+
+Recovery rate
+
+Incremental recovery
+
+Action distribution
+
+Policy violations
+
+Stopping-rule compliance
+
+Evaluation outputs are generated separately from the core source code and are not treated as production evidence.
+
+Any synthetic or controlled evaluation should be interpreted as prototype validation rather than real Razorpay performance.
+
+🛠️ Tech Stack
+
+Backend
+
+Python
+
+FastAPI
+
+scikit-learn
+
+pandas
+
+NumPy
+
+SQLite
+
+Frontend
+
+Next.js
+
+React
+
+TypeScript
+
+Tailwind CSS
+
+Decisioning
+
+Random Forest
+
+Expected Recovered Value optimization
+
+Policy engine
+
+Safety engine
+
+Recovery orchestration
+
+Voice
+
+Browser speech recognition
+
+Hinglish recovery flow
+
+Promise-to-pay capture and verification
+
+📁 Project Structure
+
+RecoverOS/
 ├── app/
 │   ├── api.py
-│   ├── approve_promotion.py
-│   ├── dashboard.py
-│   ├── decision_engine.py
-│   ├── decision_orchestrator.py
-│   ├── learning_loop.py
+│   ├── database.py
+│   ├── persistence.py
 │   ├── ml_model.py
 │   ├── model_evaluator.py
-│   ├── model_registry.py
-│   ├── outcome_api.py
-│   ├── outcome_engine.py
+│   ├── decision_orchestrator.py
+│   ├── erv_optimizer.py
 │   ├── policy_engine.py
-│   ├── production_feedback.py
-│   ├── production_retraining.py
-│   ├── promotion_gate.py
-│   ├── recovery_memory.py
 │   ├── safety_engine.py
-│   ├── sandbox_runner.py
-│   └── strategy_optimizer.py
+│   ├── simulator.py
+│   ├── batch_evaluation.py
+│   ├── subscription_recovery.py
+│   ├── mandate_retry.py
+│   ├── checkout_recovery.py
+│   ├── receivables_recovery.py
+│   ├── voice_recovery.py
+│   ├── voice_api.py
+│   └── voice_persistence.py
 │
 ├── data/
-│   ├── advanced_training_data.csv
-│   ├── decision_audit.jsonl
-│   ├── model_registry.json
-│   ├── outcomes.jsonl
-│   ├── production_feedback.csv
-│   └── recovery_memory.json
+│   └── advanced_training_data.csv
 │
 ├── models/
-│   ├── model_registry.json
-│   ├── recovery_model.pkl
-│   └── recovery_model_challenger.pkl
+│   └── recovery_model.pkl
 │
-├── requirements.txt
-└── README.md
-Running the project
-Install dependencies
+└── frontend/
+    ├── src/
+    │   └── app/
+    ├── public/
+    ├── package.json
+    └── next.config.ts
+
+▶️ Run Locally
+
+1. Clone the repository
+
+git clone https://github.com/lucky23-afk/RecoverOS.git
+cd RecoverOS
+
+2. Create and activate the Python environment
+
+Windows PowerShell:
+
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+3. Install backend dependencies
+
 pip install -r requirements.txt
-Run decision orchestration
-python app\decision_orchestrator.py
-Analyze outcomes
-python app\outcome_engine.py
-Build production feedback
-python app\production_feedback.py
-Check learning status
-python app\learning_loop.py
-Train a production challenger
 
-Only after the production safety threshold is reached:
+4. Start the FastAPI backend
 
-python app\production_retraining.py
-Run the promotion gate
-python app\promotion_gate.py
-Human-approved promotion
-python app\approve_promotion.py
-Inspect the model registry
-python app\model_registry.py
-Launch the dashboard
-streamlit run app\dashboard.py
-Demo and sandbox data
+uvicorn app.api:app --reload
 
-RecoverOS contains demo and sandbox tools for demonstrating the system without real customer transactions.
+Backend:
 
-Examples:
+http://127.0.0.1:8000
 
-python app\demo_outcomes.py
-python app\sandbox_runner.py
+API docs:
 
-These records are explicitly classified as simulated/non-production data.
+http://127.0.0.1:8000/docs
 
-They should not be presented as real customer production outcomes.
+5. Start the frontend
 
-Verification
+Open a second terminal:
 
-Run:
+cd frontend
+npm install
+npm run dev
 
-python -m compileall app
-python app\model_registry.py
-python app\decision_orchestrator.py
-python app\outcome_engine.py
-python app\production_feedback.py
-python app\learning_loop.py
-streamlit run app\dashboard.py
-Scope and limitations
+Frontend:
 
-RecoverOS is a prototype.
+http://localhost:3000
 
-The repository includes synthetic/demo/sandbox data and a limited amount of production-marked outcome data.
+🔎 Example Decision
 
-The current project therefore does not claim large-scale real-world production validation.
+For a transient payment failure, a decision can move through the full pipeline:
 
-Production deployment would require additional work including:
+bank_timeout
+     ↓
+ML recovery probability
+     ↓
+ERV optimization
+     ↓
+Policy: ALLOW
+     ↓
+Safety: ALLOW
+     ↓
+Final Action: retry_payment
 
-live payment gateway integration
-larger real-world datasets
-authentication and authorization
-privacy and security controls
-monitoring and alerting
-model drift detection
-stronger statistical validation
-temporal validation
-production infrastructure
-compliance review
-Why RecoverOS?
+A high-risk, high-value, or low-confidence case can instead terminate in:
 
-RecoverOS is built around a simple principle:
+hold_for_review
 
-Not every failed payment deserves the same response.
+This separation makes the decision process explainable and auditable.
 
-By combining payment context, machine learning, strategy optimization, policy rules, safety controls, explainability, auditability, and controlled model learning, RecoverOS aims to make payment recovery more intelligent and safer than blind retry automation.
+🎙️ Voice Recovery
 
-Disclaimer
+RecoverOS includes a dedicated Voice Recovery interface for customer conversations.
 
-All demo, sandbox, test, and simulated payment data in this repository are synthetic or simulated.
+The flow supports:
 
-This project does not claim that simulated outcomes represent real Razorpay customers, merchants, transactions, or production recovery performance.
+Starting a recovery conversation
 
-RecoverOS is a prototype created for experimentation, learning, and demonstration.
+Capturing a customer response
+
+Continuing the recovery flow
+
+Recording a promise to pay
+
+Verifying the promise
+
+The browser speech-recognition experience is intended for the project demo environment.
+
+🏆 Hackathon
+
+Event: Razorpay Buildathon
+Track: Track 03 — AI Revenue Recovery
+Team: Fernweh
+
+⚠️ Disclaimer
+
+RecoverOS is a hackathon prototype demonstrating AI-assisted revenue recovery decisioning and bounded workflow orchestration.
+
+The project uses controlled/synthetic evaluation data where applicable and does not claim real Razorpay transaction recovery, production payment execution, or real production revenue recovered.
+
+🔗 Repository
+
+GitHub: https://github.com/lucky23-afk/RecoverOS
