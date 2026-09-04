@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import VoiceRecovery from "./VoiceRecovery";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://recoveros-api-ovp0.onrender.com";
 
 type Tab =
   | "overview"

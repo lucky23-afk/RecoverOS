@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://recoveros-api-ovp0.onrender.com";
 
 type Session = Record<string, any>;
 
