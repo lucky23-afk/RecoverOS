@@ -416,6 +416,7 @@ Vercel + Render
 📁 Project Structure
 
 RecoverOS/
+│
 ├── app/
 │   ├── api.py
 │   ├── decision_orchestrator.py
@@ -425,20 +426,24 @@ RecoverOS/
 │   ├── safety_engine.py
 │   ├── retry_scheduler.py
 │   ├── razorpay_adapter.py
-│   ├── subscription_recovery.py
-│   ├── mandate_retry.py
-│   ├── checkout_recovery.py
-│   ├── receivables_recovery.py
-│   ├── voice_recovery.py
 │   └── ...
+│
 ├── assets/
 │   └── decision-demo.png
+│
 ├── data/
 │   └── advanced_training_data.csv
+│
 ├── models/
 │   └── recovery_model.pkl
+│
 ├── frontend/
-│   └── ...
+│   ├── src/
+│   │   └── app/
+│   │       ├── page.tsx
+│   │       └── VoiceRecovery.tsx
+│   └── package.json
+│
 ├── requirements.txt
 └── README.md
 
