@@ -415,37 +415,40 @@ Vercel + Render
 
 📁 Project Structure
 
-RecoverOS/
-│
-├── app/
-│   ├── api.py
-│   ├── decision_orchestrator.py
-│   ├── ml_model.py
-│   ├── erv_optimizer.py
-│   ├── policy_engine.py
-│   ├── safety_engine.py
-│   ├── retry_scheduler.py
-│   ├── razorpay_adapter.py
-│   └── ...
-│
-├── assets/
-│   └── decision-demo.png
-│
-├── data/
-│   └── advanced_training_data.csv
-│
-├── models/
-│   └── recovery_model.pkl
-│
-├── frontend/
-│   ├── src/
-│   │   └── app/
-│   │       ├── page.tsx
-│   │       └── VoiceRecovery.tsx
-│   └── package.json
-│
-├── requirements.txt
-└── README.md
+## 📁 Project Structure
+
+### Backend
+- `app/api.py` - FastAPI application and API routes
+- `app/decision_orchestrator.py` - Main recovery decision pipeline
+- `app/ml_model.py` - Recovery probability model
+- `app/erv_optimizer.py` - Expected Recovered Value optimization
+- `app/policy_engine.py` - Policy-based action authorization
+- `app/safety_engine.py` - Safety and risk controls
+- `app/retry_scheduler.py` - Cause-aware retry scheduling
+- `app/razorpay_adapter.py` - Razorpay Test Mode integration
+- `app/subscription_recovery.py` - Subscription recovery workflow
+- `app/mandate_retry.py` - Mandate recovery workflow
+- `app/checkout_recovery.py` - Checkout recovery workflow
+- `app/receivables_recovery.py` - B2B receivables workflow
+- `app/voice_recovery.py` - Voice recovery workflow
+
+### Frontend
+- `frontend/src/app/page.tsx` - Main dashboard
+- `frontend/src/app/VoiceRecovery.tsx` - Voice recovery interface
+- `frontend/src/app/globals.css` - Global styling
+- `frontend/package.json` - Frontend dependencies
+
+### ML & Data
+- `models/recovery_model.pkl` - Champion recovery model
+- `data/advanced_training_data.csv` - Training / evaluation data
+
+### Assets
+- `assets/decision-demo.png` - Decision engine screenshot
+
+### Configuration
+- `requirements.txt` - Python dependencies
+- `.env` - Razorpay configuration
+- `README.md` - Project documentation
 
 ⚙️ Run locally
 
