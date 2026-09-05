@@ -86,6 +86,17 @@ Verify outcome
       ↓
 Record decision
 🧠 Decision Pipeline
+---
+
+## 🖥️ Decision Engine in Action
+
+<p align="center">
+  <img src="./assets/decision-demo.png" alt="RecoverOS Decision Engine" width="900">
+</p>
+
+<p align="center">
+  <sub>ML → ERV → Policy → Safety → Final Action → Retry Plan</sub>
+</p>
 
 The decision system is deliberately bounded:
 
