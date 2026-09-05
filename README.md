@@ -1,506 +1,522 @@
-evaluation figures.
-
 <div align="center">
 
-# ⚡ RecoverOS
+⚡ RecoverOS
 
-### AI-Powered Revenue Recovery Orchestration
+AI-Powered Revenue Recovery Orchestration
 
-**Detect revenue at risk → predict recoverability → optimize the intervention → enforce policy & safety → run bounded recovery workflows**
+Detect revenue at risk → predict recoverability → optimize the intervention → enforce policy & safety → execute bounded recovery workflows
 
 <p>
-  <a href="https://recover-os-delta.vercel.app/">🌐 Live Demo</a> •
-  <a href="https://recoveros-api-ovp0.onrender.com/docs">📚 API Docs</a> •
-  <a href="https://github.com/lucky23-afk/RecoverOS">💻 GitHub</a>
+  <a href="https://recover-os-delta.vercel.app/">Live Demo</a> ·
+  <a href="https://recoveros-api-ovp0.onrender.com/docs">API Docs</a> ·
+  <a href="https://github.com/lucky23-afk/RecoverOS">GitHub</a>
 </p>
 
 <img src="https://img.shields.io/badge/Razorpay-Buildathon%20Track%2003-0C2340?style=for-the-badge" alt="Razorpay Buildathon Track 03" />
-<img src="https://img.shields.io/badge/Status-Hackathon%20Prototype-7C3AED?style=for-the-badge" alt="Hackathon Prototype" />
 <img src="https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
 <img src="https://img.shields.io/badge/Frontend-Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
 <img src="https://img.shields.io/badge/ML-scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="scikit-learn" />
 
 </div>
 
----
+The idea
 
-## 🎯 What is RecoverOS?
+Payment failures are not interchangeable.
 
-Payment failures are not all the same.
+A temporary bank timeout may be worth retrying. An expired card needs customer action. Insufficient funds may call for a delayed reminder. A suspicious reversal should stop automation and go to review.
 
-A temporary bank timeout may justify a retry. An expired card requires customer action. Insufficient funds may need a delayed reminder. Suspicious activity should be stopped and sent for review.
+RecoverOS turns those differences into decisions.
 
-**RecoverOS is an AI-powered revenue recovery decision and orchestration platform built to handle those cases differently.**
+It is an AI-powered revenue recovery platform that combines ML prediction, Expected Recovered Value (ERV), policy controls, safety guardrails, cause-aware timing, and bounded workflows to decide what should happen next.
 
-Instead of blindly retrying every failed payment, RecoverOS combines:
+AI predicts. ERV optimizes. Policy authorizes. Safety constrains. Workflows execute. Audit records.
 
-- 🤖 ML-based recovery prediction
-- 💰 Expected Recovered Value (ERV) optimization
-- 🛡️ Policy-controlled decisioning
-- 🔒 Safety guardrails
-- ⏱️ Cause-aware retry scheduling
-- 🔄 Bounded recovery workflows
-- ✅ Verification
-- 📋 Auditability
+Decision Engine
 
-### Core Principle
 
-> **AI chooses. ERV optimizes. Policy authorizes. Safety constrains. Workflows execute. Audit records.**
 
----
+The core decision path is:
 
-## 🚨 The Problem
+Failed Payment
+      │
+      ▼
+Understand Failure Context
+      │
+      ▼
+Predict Recovery Probability
+      │
+      ▼
+Rank Actions by Expected Recovered Value
+      │
+      ▼
+Apply Policy
+      │
+      ▼
+Run Safety Checks
+      │
+      ▼
+Choose Final Action
+      │
+      ▼
+Schedule / Execute Bounded Workflow
+      │
+      ▼
+Verify Outcome
+      │
+      ▼
+Audit Decision
 
-Traditional payment recovery can look like this:
+The optimizer never bypasses policy or safety controls.
 
-```text
+Why RecoverOS?
+
+Traditional recovery
+
 Payment fails
-     ↓
+    ↓
 Retry
-     ↓
+    ↓
 Retry again
-     ↓
+    ↓
 Retry again
 
-That approach treats every failure the same.
-
-RecoverOS instead reasons about why the payment failed and what intervention is appropriate:
-
-Payment Failure
-      ↓
-Understand the failure context
-      ↓
-Predict recovery probability
-      ↓
-Rank recovery actions by expected value
-      ↓
-Apply policy constraints
-      ↓
-Run safety checks
-      ↓
-Choose final action
-      ↓
-Schedule / execute bounded workflow
-      ↓
-Verify outcome
-      ↓
-Record decision
-
-🧠 Decision Pipeline
-<p align="center">
-  <img src="./assets/decision-demo.png.png" alt="RecoverOS Decision Engine" width="900">
-</p>
-
-<p align="center">
-  <sub>ML → ERV → Policy → Safety → Final Action → Retry Plan</sub>
-</p>
-
-The decision system is deliberately bounded:
-
-ML
- ↓
-ERV
- ↓
-Policy
- ↓
-Safety
- ↓
-Final Action
-
-The optimizer does not bypass policy or safety controls.
-
-
-💡 Why RecoverOS?
-Traditional Recovery
-Failure
-  ↓
-Retry
-  ↓
-Retry
-  ↓
-Retry
 RecoverOS
-Failure
-   ↓
+
+Payment fails
+    ↓
 Context
-   ↓
+    ↓
 Recovery Probability
-   ↓
+    ↓
 Economic Optimization
-   ↓
+    ↓
 Policy
-   ↓
+    ↓
 Safety
-   ↓
+    ↓
 Cause-Aware Timing
-   ↓
+    ↓
 Bounded Recovery
-   ↓
+    ↓
 Verification
-   ↓
+    ↓
 Audit
 
-RecoverOS is designed around the idea that the best recovery action is not always the action with the highest probability of success.
+The goal is not simply to maximize retries. It is to choose the most useful and defensible intervention for each failure.
 
-The system considers:
+What it does
 
-likelihood of recovery
-action cost
-risk
-customer/payment context
-retry count
-failure type
-policy restrictions
-safety conditions
-✨ Key Features
-🤖 AI Recovery Decisioning
+🤖 ML Recovery Prediction
 
 The current champion model predicts the probability that a failed payment can be recovered.
 
-The model uses 15 features:
+It uses 15 features including:
 
-Amount
+Payment amount and payment method
+
 Failure reason
-Payment method
+
 Merchant type
-Previous successes
-Previous failures
-Retry count
-Days since last payment
+
+Previous successes and failures
+
+Retry count and retry interval
+
 Customer tenure
+
 Mandate age
-Average amount
-Amount vs average
+
+Average payment amount
+
+Amount vs. average
+
 Recent success rate
+
 Failure frequency
-Retry interval
-💰 Expected Recovered Value (ERV)
 
-RecoverOS does not blindly choose the action with the highest raw probability.
+Days since last payment
 
-Instead it evaluates candidate actions using Expected Recovered Value, taking recovery probability, cost, and risk into account.
+💰 Expected Recovered Value
 
-Supported recovery actions include:
+RecoverOS does not blindly pick the action with the highest probability.
 
-retry_payment
-send_update_link
-send_reminder
-hold_for_review
+Candidate actions are evaluated using Expected Recovered Value, taking recovery probability, cost, and risk into account.
 
-Example:
+Supported actions:
 
-Action                  Probability      Expected Value
---------------------------------------------------------
-retry_payment              High              ₹X
-send_update_link           High              ₹Y
-hold_for_review            Lower             ₹Z
-
-The final decision is still constrained by policy and safety.
+retry_payment · send_update_link · send_reminder · hold_for_review
 
 🛡️ Policy Engine
 
-The policy engine determines which actions are allowed for a failure class.
+Policies determine which actions are allowed for each failure class.
 
-Failure Class	Typical Allowed Actions
-Transient	Retry / Reminder / Review
-Customer Action Required	Update Link / Reminder / Review
-Risk	Review Only
-Unknown	Review Only
+Failure class
 
-Examples:
+Typical action
 
-bank_timeout
-→ retry_payment allowed
+Transient
 
-expired_card
-→ send_update_link allowed
+Retry / Reminder / Review
 
-insufficient_funds
-→ send_reminder allowed
+Customer action required
 
-suspicious_reversal
-→ hold_for_review only
+Update Link / Reminder / Review
+
+Risk
+
+Review only
+
+Unknown
+
+Review only
+
 🔒 Safety Engine
 
-Safety controls provide hard boundaries around automated recovery.
+Safety rules provide hard limits around automation:
 
-Current controls include:
+Maximum retry limits
 
-Maximum retry limit
 Low-confidence review
+
 Suspicious-reversal review
+
 Recently changed mandate review
+
 High-value payment review
+
 Blocking when required
-Example
+
+Example:
+
 retry_count >= maximum
         ↓
 automatic retry stopped
         ↓
 hold_for_review
 
-The safety layer can override an otherwise favorable recovery recommendation.
+⏱️ Cause-Aware Scheduling
 
-⏱️ Cause-Aware Retry Scheduling
+Different failure causes get different recovery timing.
 
-RecoverOS does not use one universal retry delay.
+Failure
 
-The delay depends on the failure cause.
+Action
+
+Timing
 
 bank_timeout
-    → retry_payment
-    → 15 minutes
+
+retry_payment
+
+15 min
 
 network_error
-    → retry_payment
-    → 30 minutes
+
+retry_payment
+
+30 min
 
 temporary_bank_error
-    → retry_payment
-    → 60 minutes
+
+retry_payment
+
+60 min
 
 insufficient_funds
-    → send_reminder
-    → 24 hours
+
+send_reminder
+
+24 hr
 
 expired_card
-    → send_update_link
-    → immediately
+
+send_update_link
+
+Immediate
 
 mandate_expired
-    → send_update_link
-    → immediately
+
+send_update_link
+
+Immediate
 
 suspicious_reversal
-    → hold_for_review
-    → no automatic retry
 
-Retry limits are enforced automatically.
+hold_for_review
 
-🔄 Recovery Workflows
+No automatic retry
 
-RecoverOS supports multiple revenue-recovery workflows:
+Recovery Workflows
 
-Payment Recovery
+RecoverOS is designed beyond a single retry API.
 
-Recover transient and payment-method failures using ML-driven decisioning.
+Payment Recovery: ML-driven recovery for failed payments
 
-Failed Subscriptions
+Subscription Recovery: Bounded recovery for recurring payment failures
 
-Handle recurring payment failures through bounded subscription recovery flows.
+Mandate Retry: Controlled retry and verification for mandate-related failures
 
-Mandate Retry
+Checkout Recovery: Recovery of checkout/payment-stage drop-offs
 
-Manage recurring/mandate-related payment failures with retry limits and verification.
+B2B Receivables: Overdue invoice recovery
 
-Checkout Recovery
+Promise-to-Pay: Capture and track customer payment commitments
 
-Handle checkout abandonment and payment-stage drop-offs.
+Voice Recovery: Browser-based conversational recovery with Hinglish support
 
-B2B Receivables
-
-Manage overdue invoices and recovery actions.
-
-Promise-to-Pay
-
-Capture customer commitments and track promised payment dates.
-
-Voice Recovery
-
-Enable conversational recovery using browser voice interaction and Hinglish support.
-
-🗣️ Hinglish Voice Recovery
-
-The voice workflow supports:
+Voice recovery flow
 
 Browser Speech Recognition
-        ↓
+          ↓
 Voice-to-Text
-        ↓
+          ↓
 Hinglish Recovery Conversation
-        ↓
+          ↓
 Promise-to-Pay Capture
-        ↓
+          ↓
 Payment Verification
-        ↓
+          ↓
 Recovery State
 
-The system is designed for customer recovery conversations rather than simply sending static messages.
+Evaluation
 
-📋 Auditability
-
-Every decision can preserve the reasoning chain.
-
-Payment Context
-      ↓
-Recovery Probability
-      ↓
-Candidate Actions
-      ↓
-ERV
-      ↓
-Policy Decision
-      ↓
-Safety Decision
-      ↓
-Final Action
-      ↓
-Retry Plan
-      ↓
-Integrity Result
-
-This makes the recovery decision explainable and reviewable.
-
-📊 Machine Learning Performance
+ML model
 
 Current champion artifact:
 
 models/recovery_model.pkl
 
-Evaluator output:
+Development-dataset evaluator results:
 
-Metric	Result
-Records	10,000
-Features	15
-Accuracy	81.74%
-Precision	83.17%
-Recall	79.07%
-F1 Score	81.07%
-ROC-AUC	90.87%
+Metric
 
-Note: These metrics are evaluator results on the development dataset. They should not be interpreted as independent holdout/test-set performance.
+Result
 
-The champion model artifact is treated as controlled and is not retrained during normal application execution.
+Records
 
-📈 Controlled Recovery Evaluation
+10,000
 
-RecoverOS also includes a controlled batch evaluation comparing a retry-first baseline with the RecoverOS decision pipeline.
+Features
 
-Latest Evaluation
-Metric	Baseline	RecoverOS
-Payments evaluated	1,000	1,000
-Revenue at risk	₹5,296,500	₹5,296,500
-Historically recoverable revenue captured	₹1,946,104	₹2,103,088
-Recoverable-revenue capture rate	78.87%	85.23%
-Automatic actions	759	745
-Human review	241	255
-Blocked	—	0
-Improvement
-Incremental historically recoverable revenue captured
-₹156,984
+15
 
-Capture-rate uplift
-+6.36 percentage points
+Accuracy
 
-Policy violations
+81.74%
+
+Precision
+
+83.17%
+
+Recall
+
+79.07%
+
+F1 Score
+
+81.07%
+
+ROC-AUC
+
+90.87%
+
+These are development/evaluator results, not independent holdout or production performance.
+
+Controlled recovery benchmark
+
+Metric
+
+Retry-first baseline
+
+RecoverOS
+
+Payments evaluated
+
+1,000
+
+1,000
+
+Revenue at risk
+
+₹5,296,500
+
+₹5,296,500
+
+Historically recoverable revenue captured
+
+₹1,946,104
+
+₹2,103,088
+
+Recoverable-revenue capture rate
+
+78.87%
+
+85.23%
+
+Automatic actions
+
+759
+
+745
+
+Human review
+
+241
+
+255
+
+Blocked
+
+—
+
 0
-Important Interpretation
 
-These figures are from a controlled benchmark using development/labeled data.
+Incremental historically recoverable revenue captured: ₹156,984
+Capture-rate uplift: +6.36 percentage points
+Policy violations: 0
 
-They represent historically recoverable-revenue capture, not proof that RecoverOS causally recovered that amount of live money.
+This is a controlled benchmark on development/labeled data. It represents historically recoverable-revenue capture, not proof of live-money recovery or causal impact.
 
-They should not be presented as actual Razorpay production revenue recovered.
+Razorpay Test Mode
 
-💳 Razorpay Test Mode Integration
+RecoverOS includes a Razorpay Test Mode integration layer for:
 
-RecoverOS includes a Razorpay Test Mode integration layer.
-
-Supported
-Razorpay Test Mode authentication
 Payment lookup
+
 Order lookup
+
 Payment status normalization
+
 Payment signature verification
+
 Webhook signature verification
+
 Webhook event normalization
+
 Duplicate-event protection
+
 Endpoints
+
 GET  /razorpay/payment/{payment_id}
 POST /razorpay/verify
 POST /razorpay/webhook
-Webhook
+
+Webhook:
+
 https://recoveros-api-ovp0.onrender.com/razorpay/webhook
 
-The webhook layer verifies the incoming Razorpay signature before normalizing the event.
+Incoming webhooks are signature-verified before event normalization. Provider events are then intended to be enriched with RecoverOS customer/payment history before entering the full decision pipeline.
 
-Provider events are then intended to be enriched with RecoverOS customer/payment history before entering the full 15-feature ML decision pipeline.
+Boundary: the current integration is configured for Razorpay Test Mode. RecoverOS does not claim live production Razorpay money recovery.
 
-Current boundary: Razorpay integration is configured for Test Mode. This project does not claim live production Razorpay money recovery.
+Architecture
 
-🏗️ System Architecture
-                         ┌──────────────────────┐
-                         │     Next.js UI       │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │    FastAPI Backend   │
-                         └──────────┬───────────┘
-                                    │
-             ┌──────────────────────┼──────────────────────┐
-             ▼                      ▼                      ▼
-      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
-      │   ML Model   │      │     ERV      │      │    Policy    │
-      │  Prediction  │      │  Optimizer   │      │    Engine    │
-      └──────┬───────┘      └──────┬───────┘      └──────┬───────┘
-             └─────────────────────┼──────────────────────┘
-                                   ▼
-                         ┌──────────────────────┐
-                         │    Safety Engine    │
-                         └──────────┬───────────┘
-                                    ▼
-                         ┌──────────────────────┐
-                         │ Bounded Workflows   │
-                         └──────────┬───────────┘
-                                    ▼
-                         ┌──────────────────────┐
-                         │ Retry Scheduler      │
-                         └──────────┬───────────┘
-                                    ▼
-                         ┌──────────────────────┐
-                         │ Verification /       │
-                         │ Razorpay Adapter    │
-                         └──────────┬───────────┘
-                                    ▼
-                         ┌──────────────────────┐
-                         │ SQLite + Audit Trail │
-                         └──────────────────────┘
-🧰 Tech Stack
+                         ┌──────────────────┐
+                         │    Next.js UI    │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │  FastAPI Backend │
+                         └────────┬─────────┘
+                                  │
+              ┌───────────────────┼───────────────────┐
+              ▼                   ▼                   ▼
+       ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+       │  ML Model    │    │     ERV      │    │   Policy     │
+       │  Prediction  │    │  Optimizer   │    │   Engine     │
+       └──────┬───────┘    └──────┬───────┘    └──────┬───────┘
+              └───────────────────┼───────────────────┘
+                                  ▼
+                         ┌──────────────────┐
+                         │  Safety Engine   │
+                         └────────┬─────────┘
+                                  ▼
+                         ┌──────────────────┐
+                         │ Bounded Workflow│
+                         └────────┬─────────┘
+                                  ▼
+                         ┌──────────────────┐
+                         │ Retry Scheduler  │
+                         └────────┬─────────┘
+                                  ▼
+                         ┌──────────────────┐
+                         │ Verification /   │
+                         │ Razorpay Adapter │
+                         └────────┬─────────┘
+                                  ▼
+                         ┌──────────────────┐
+                         │ SQLite + Audit   │
+                         └──────────────────┘
+
+Tech Stack
+
 Frontend
+
 Next.js
+
 React
+
 TypeScript
+
 Tailwind CSS
-Backend
+
+Backend & ML
+
 Python
+
 FastAPI
+
 Pydantic
+
 scikit-learn
+
 pandas
+
 NumPy
+
 SQLite
+
 Payments
+
 Razorpay Python SDK
+
 Razorpay Test Mode
+
 Razorpay webhooks
-Payment signature verification
+
+Payment/signature verification
+
 Decisioning
+
 Random Forest recovery prediction
+
 Expected Recovered Value optimization
+
 Policy engine
+
 Safety engine
+
 Cause-aware retry scheduler
+
 Bounded workflow orchestration
+
 Verification
+
 Audit trail
+
 Deployment
+
 Frontend: Vercel
+
 Backend: Render
+
 Database: SQLite
-📁 Project Structure
+
+Project Structure
+
 RecoverOS/
-│
 ├── app/
 │   ├── api.py
 │   ├── batch_evaluation.py
@@ -521,13 +537,10 @@ RecoverOS/
 │   ├── voice_api.py
 │   ├── voice_persistence.py
 │   └── voice_recovery.py
-│
 ├── data/
 │   └── advanced_training_data.csv
-│
 ├── models/
 │   └── recovery_model.pkl
-│
 ├── frontend/
 │   ├── public/
 │   ├── src/
@@ -538,22 +551,25 @@ RecoverOS/
 │   │       └── page.tsx
 │   ├── next.config.ts
 │   └── package.json
-│
 ├── requirements.txt
 └── README.md
-⚙️ Quick Start
-1. Clone the repository
+
+Quick Start
+
+1. Clone
+
 git clone https://github.com/lucky23-afk/RecoverOS.git
 cd RecoverOS
-2. Create the Python environment
-Windows PowerShell
+
+2. Backend environment
+
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-3. Install backend dependencies
 pip install -r requirements.txt
-4. Configure environment variables
 
-Create a .env file in the project root:
+3. Environment variables
+
+Create .env in the project root:
 
 RAZORPAY_KEY_ID=your_test_key_id
 RAZORPAY_KEY_SECRET=your_test_secret
@@ -562,19 +578,19 @@ RAZORPAY_WEBHOOK_SECRET=your_webhook_secret
 
 Never commit secrets to GitHub.
 
-5. Start the backend
+4. Start the backend
+
 uvicorn app.api:app --reload --host 127.0.0.1 --port 8000
 
 Backend:
 
 http://127.0.0.1:8000
 
-API documentation:
+API docs:
 
 http://127.0.0.1:8000/docs
-6. Start the frontend
 
-Open another terminal:
+5. Start the frontend
 
 cd frontend
 npm install
@@ -583,132 +599,146 @@ npm run dev
 Frontend:
 
 http://localhost:3000
-🔌 API Surface
+
+API Surface
+
 Core
+
 GET  /health
 GET  /database/health
 GET  /metrics
-
 POST /validate
 POST /decision
 POST /decision/raw
-Razorpay
-GET  /razorpay/payment/{payment_id}
-POST /razorpay/verify
-POST /razorpay/webhook
-Subscription Recovery
+
+Recovery
+
 POST /subscription/start
 POST /subscription/execute
 POST /subscription/verify
-Mandate Recovery
+
 POST /mandate/start
 POST /mandate/execute
 POST /mandate/verify
-Checkout Recovery
+
 POST /checkout/start
 POST /checkout/execute
 POST /checkout/verify
-Receivables
+
 POST /receivables/start
 POST /receivables/execute
 POST /receivables/promise
 POST /receivables/verify
-Voice Recovery
+
+Voice
+
 POST /voice/start
 POST /voice/turn
 POST /voice/transcribe
 POST /voice/verify
-🎬 Demo Flow
-Payment Recovery
-Open Live Demo
-      ↓
-Payment Recovery
-      ↓
-Enter Failed Payment Scenario
-      ↓
+
+Demo Flow
+
+A typical payment-recovery demo looks like this:
+
+Failed Payment Scenario
+        ↓
 Run Decision
-      ↓
+        ↓
 ML Probability
-      ↓
+        ↓
 ERV Ranking
-      ↓
+        ↓
 Policy Decision
-      ↓
+        ↓
 Safety Decision
-      ↓
+        ↓
 Final Action
-      ↓
+        ↓
 Retry Plan
-      ↓
+        ↓
 Audit Record
-Example: Transient Failure
+
+Example: transient failure
+
 bank_timeout
-     ↓
+    ↓
 ML
-     ↓
+    ↓
 ERV
-     ↓
+    ↓
 Policy = ALLOW
-     ↓
+    ↓
 Safety = ALLOW
-     ↓
+    ↓
 retry_payment
-     ↓
-15 minute retry plan
-Example: Risky Failure
+    ↓
+15-minute retry plan
+
+Example: risky failure
+
 suspicious_reversal
-     ↓
+    ↓
 Policy = REVIEW
-     ↓
+    ↓
 Safety = REVIEW
-     ↓
+    ↓
 hold_for_review
-🔐 Safety & Production Boundaries
 
-RecoverOS is intentionally designed as a bounded recovery system.
+Safety & Production Boundaries
 
-Current boundaries include:
+RecoverOS is intentionally a bounded recovery system.
+
+It includes:
 
 Maximum retry limits
+
 Policy-controlled actions
+
 Safety-controlled actions
+
 Human-review paths
+
 Low-confidence stopping
+
 High-value review
+
 Suspicious-event review
+
 Controlled model artifact
+
 Separation of production learning from demo/synthetic outcomes
 
 RecoverOS does not claim:
 
 Production Razorpay revenue recovery
+
 Causal recovery from the controlled benchmark
+
 Production-grade distributed payment infrastructure
+
 Arbitrary LLM-controlled payment execution
 
-The project is a hackathon prototype demonstrating the recovery decision architecture.
+This project is a hackathon prototype demonstrating the recovery decision architecture.
 
-🏆 Razorpay Buildathon
-Razorpay Buildathon — Track 03: AI Revenue Recovery
+Razorpay Buildathon
 
+Track 03: AI Revenue Recovery
 
 RecoverOS was built around the challenge of identifying revenue at risk and selecting the safest, most economically useful intervention for failed payments and related recovery scenarios.
 
-🔗 Links
-🌐 Live Demo
+Links
 
-https://recover-os-delta.vercel.app/
+Live Demo: https://recover-os-delta.vercel.app/
 
-⚙️ API
+API: https://recoveros-api-ovp0.onrender.com/
 
-https://recoveros-api-ovp0.onrender.com/
+API Documentation: https://recoveros-api-ovp0.onrender.com/docs
 
-📚 API Documentation
+GitHub: https://github.com/lucky23-afk/RecoverOS
 
-https://recoveros-api-ovp0.onrender.com/docs
+<div align="center">
 
-💻 GitHub
+RecoverOS · AI Revenue Recovery Orchestration
 
-https://github.com/lucky23-afk/RecoverOS
-
-</div> ```
+</div>
