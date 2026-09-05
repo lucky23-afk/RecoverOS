@@ -702,11 +702,4 @@ https://recoveros-api-ovp0.onrender.com/docs
 
 https://github.com/lucky23-afk/RecoverOS
 
-<div align="center">
-⚡ Recover revenue intelligently.
-🛡️ Automate with guardrails.
-📋 Keep every decision auditable.
-
-RecoverOS × Fernweh
-
 </div> ```
