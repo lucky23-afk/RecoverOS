@@ -85,13 +85,10 @@ Schedule / execute bounded workflow
 Verify outcome
       ↓
 Record decision
+
 🧠 Decision Pipeline
----
-
-## 🖥️ Decision Engine in Action
-
 <p align="center">
-  <img src="./assets/decision-demo.png" alt="RecoverOS Decision Engine" width="900">
+  <img src="./assets/decision-demo.png.png" alt="RecoverOS Decision Engine" width="900">
 </p>
 
 <p align="center">
@@ -111,6 +108,7 @@ Safety
 Final Action
 
 The optimizer does not bypass policy or safety controls.
+
 
 💡 Why RecoverOS?
 Traditional Recovery
