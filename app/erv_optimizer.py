@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict, List
 
+from simulator import get_action_probability
+
 
 @dataclass(frozen=True)
 class ActionOption:
@@ -26,17 +28,11 @@ def expected_recovered_value(
         - risk penalty
     """
 
-    amount = max(
-        float(amount),
-        0.0,
-    )
+    amount = max(float(amount), 0.0)
 
     probability = max(
         0.0,
-        min(
-            float(success_probability),
-            1.0,
-        ),
+        min(float(success_probability), 1.0),
     )
 
     return (
@@ -50,47 +46,30 @@ def rank_actions(
     amount: float,
     actions: List[ActionOption],
 ) -> List[Dict]:
-
     ranked = []
 
     for action in actions:
-
         erv = expected_recovered_value(
-            amount,
-            action.success_probability,
-            action.cost,
-            action.risk_penalty,
+            amount=amount,
+            success_probability=action.success_probability,
+            cost=action.cost,
+            risk_penalty=action.risk_penalty,
         )
 
         ranked.append(
             {
-                "action":
-                    action.name,
-
-                "success_probability":
-                    action.success_probability,
-
-                "cost":
-                    action.cost,
-
-                "risk_penalty":
-                    action.risk_penalty,
-
-                "human_review":
-                    action.human_review,
-
-                "expected_recovered_value":
-                    round(
-                        erv,
-                        2,
-                    ),
+                "action": action.name,
+                "success_probability": action.success_probability,
+                "cost": action.cost,
+                "risk_penalty": action.risk_penalty,
+                "human_review": action.human_review,
+                "expected_recovered_value": round(erv, 2),
             }
         )
 
     return sorted(
         ranked,
-        key=lambda x:
-            x["expected_recovered_value"],
+        key=lambda x: x["expected_recovered_value"],
         reverse=True,
     )
 
@@ -101,115 +80,94 @@ def optimize_recovery_action(
     failure_reason: str,
     retry_count: int = 0,
     risk_score: float = 0.0,
+    payment: Dict | None = None,
 ) -> Dict:
     """
     Choose the recovery action with the highest ERV.
 
-    retry_count and risk_score are considered when
-    ranking candidate actions.
+    IMPORTANT:
+    ERV now uses the SAME action-specific probability function
+    used by the recovery simulator.
+
+    This keeps:
+        ML -> ERV -> Execution evaluation
+
+    internally consistent.
     """
 
-    amount = max(
-        float(amount),
-        0.0,
-    )
+    amount = max(float(amount), 0.0)
 
     probability = max(
         0.0,
-        min(
-            float(recovery_probability),
-            1.0,
-        ),
+        min(float(recovery_probability), 1.0),
+    )
+
+    retry_count = max(int(retry_count), 0)
+
+    risk_score = max(
+        0.0,
+        min(float(risk_score), 1.0),
     )
 
     failure = str(
         failure_reason
     ).lower().strip()
 
-    retry_count = max(
-        int(retry_count),
-        0,
+    # Build the payment context required by the simulator.
+    payment_context = dict(payment or {})
+
+    payment_context.setdefault(
+        "amount",
+        amount,
     )
 
-    risk_score = max(
-        0.0,
-        min(
-            float(risk_score),
-            1.0,
-        ),
+    payment_context.setdefault(
+        "failure_reason",
+        failure,
+    )
+
+    payment_context.setdefault(
+        "retry_count",
+        retry_count,
+    )
+
+    payment_context.setdefault(
+        "risk_score",
+        risk_score,
     )
 
     # ============================================================
-    # FAILURE-CONTEXT ACTION PROBABILITIES
+    # CONSISTENT ACTION PROBABILITIES
     # ============================================================
 
-    if failure == "bank_timeout":
+    retry_p = get_action_probability(
+        payment=payment_context,
+        action="retry_payment",
+        base_probability=probability,
+    )
 
-        retry_p = min(
-            probability + 0.04,
-            0.98,
-        )
+    link_p = get_action_probability(
+        payment=payment_context,
+        action="send_update_link",
+        base_probability=probability,
+    )
 
-        link_p = min(
-            max(
-                probability - 0.06,
-                0.0,
-            ),
-            0.90,
-        )
-
-    elif failure == "network_error":
-
-        retry_p = min(
-            probability + 0.02,
-            0.96,
-        )
-
-        link_p = min(
-            max(
-                probability - 0.04,
-                0.0,
-            ),
-            0.90,
-        )
-
-    else:
-
-        retry_p = max(
-            probability - 0.10,
-            0.05,
-        )
-
-        link_p = min(
-            probability + 0.05,
-            0.85,
-        )
+    review_p = get_action_probability(
+        payment=payment_context,
+        action="hold_for_review",
+        base_probability=probability,
+    )
 
     # ============================================================
-    # RETRY SAFETY
-    # ============================================================
-
-    if retry_count >= 3:
-        retry_p = 0.0
-
-    # ============================================================
-    # RISK ADJUSTMENT
+    # RISK PENALTIES
     # ============================================================
 
     risk_penalty_multiplier = (
         1.0 + risk_score
     )
 
-    retry_risk = (
-        15.0
-        * risk_penalty_multiplier
-    )
-
-    link_risk = (
-        5.0
-        * risk_penalty_multiplier
-    )
-
+    retry_risk = 15.0 * risk_penalty_multiplier
+    link_risk = 5.0 * risk_penalty_multiplier
     review_risk = 1.0
 
     actions = [
@@ -218,21 +176,18 @@ def optimize_recovery_action(
             success_probability=retry_p,
             cost=8.0,
             risk_penalty=retry_risk,
+            human_review=False,
         ),
-
         ActionOption(
             name="send_update_link",
             success_probability=link_p,
             cost=3.0,
             risk_penalty=link_risk,
+            human_review=False,
         ),
-
         ActionOption(
             name="hold_for_review",
-            success_probability=min(
-                probability + 0.01,
-                0.95,
-            ),
+            success_probability=review_p,
             cost=20.0,
             risk_penalty=review_risk,
             human_review=True,
@@ -240,11 +195,21 @@ def optimize_recovery_action(
     ]
 
     # ============================================================
+    # RETRY SAFETY
+    # ============================================================
+
+    if retry_count >= 3:
+        actions = [
+            action
+            for action in actions
+            if action.name != "retry_payment"
+        ]
+
+    # ============================================================
     # HIGH-VALUE PAYMENTS
     # ============================================================
 
     if amount >= 25000:
-
         actions = [
             action
             for action in actions
@@ -256,7 +221,6 @@ def optimize_recovery_action(
     # ============================================================
 
     if risk_score >= 0.80:
-
         actions = [
             action
             for action in actions
@@ -268,69 +232,61 @@ def optimize_recovery_action(
     # ============================================================
 
     ranked = rank_actions(
-        amount,
-        actions,
+        amount=amount,
+        actions=actions,
     )
 
     if ranked:
-
         best = ranked[0]
-
     else:
-
         best = {
-            "action":
-                "hold_for_review",
-
-            "success_probability":
-                0.0,
-
-            "cost":
-                0.0,
-
-            "risk_penalty":
-                0.0,
-
-            "human_review":
-                True,
-
-            "expected_recovered_value":
-                0.0,
+            "action": "hold_for_review",
+            "success_probability": 0.0,
+            "cost": 0.0,
+            "risk_penalty": 0.0,
+            "human_review": True,
+            "expected_recovered_value": 0.0,
         }
 
     return {
         **best,
-
-        "ranked_actions":
-            ranked,
-
-        "reason":
-            (
-                f"Selected {best['action']} because it "
-                "maximizes expected recovered value under "
-                "the configured cost and risk assumptions."
-            ),
+        "ranked_actions": ranked,
+        "reason": (
+            f"Selected {best['action']} because it "
+            "maximizes expected recovered value using "
+            "the same action-specific probability model "
+            "used by recovery execution."
+        ),
     }
 
 
 if __name__ == "__main__":
 
+    test_payment = {
+        "payment_id": "ERV001",
+        "amount": 5000,
+        "failure_reason": "bank_timeout",
+        "previous_successes": 8,
+        "previous_failures": 1,
+        "retry_count": 1,
+        "risk_score": 0.10,
+    }
+
     result = optimize_recovery_action(
-        amount=5000,
+        amount=test_payment["amount"],
         recovery_probability=0.8471,
-        failure_reason="bank_timeout",
-        retry_count=1,
-        risk_score=0.10,
+        failure_reason=test_payment["failure_reason"],
+        retry_count=test_payment["retry_count"],
+        risk_score=test_payment["risk_score"],
+        payment=test_payment,
     )
 
     print("=" * 70)
-    print(
-        "RecoverOS - EXPECTED RECOVERED VALUE OPTIMIZER"
-    )
+    print("RecoverOS - EXPECTED RECOVERED VALUE OPTIMIZER")
     print("=" * 70)
 
     print(
-        "Amount             : ₹5,000.00"
+        f"Amount             : ₹{test_payment['amount']:,.2f}"
     )
 
     print(
@@ -338,16 +294,16 @@ if __name__ == "__main__":
     )
 
     print(
-        "Retry count        : 1"
+        f"Retry count        : {test_payment['retry_count']}"
     )
 
     print(
-        "Risk score         : 10.00%"
+        f"Risk score         : "
+        f"{test_payment['risk_score']:.2%}"
     )
 
     print(
-        f"Selected action    : "
-        f"{result['action']}"
+        f"Selected action    : {result['action']}"
     )
 
     print(
@@ -356,14 +312,14 @@ if __name__ == "__main__":
     )
 
     print()
-
     print("ACTION RANKING")
     print("-" * 70)
 
     for row in result["ranked_actions"]:
-
         print(
             f"{row['action']:<22}"
             f"p={row['success_probability']:.2%} "
             f"ERV=₹{row['expected_recovered_value']:,.2f}"
         )
+
+    print("=" * 70)
